@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li><a href="/admin/Activity/create">Create new</a></li>
+</ul>
+{volist name="activities" id="activity"}
+<a href="/admin/activity/view?id={$activity.id}">{$activity.caption}</a><a href="/admin/activity/edit?id={$activity.id}">Edit</a><br/>
+{/volist}
+</body>
+</html>

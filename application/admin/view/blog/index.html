@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+    <li><a href="/admin/blog/index">Index</a></li>
+    <li><a href="/admin/blog/create">New</a></li>
+</ul>
+{volist name="blogs" id="blog"}
+    <a href="/admin/blog/view?id={$blog.id}">{$blog.caption}</a><a href="/admin/blog/edit?id={$blog.id}">Edit</a><br/>
+{/volist}
+</body>
+</html>

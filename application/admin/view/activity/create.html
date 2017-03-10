@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+<head>
+    <meta charset="UTF-8">
+    <title>CREATE</title>
+    <script src="/static/js/jquery-1.12.0.min.js"></script>
+    <script src="/static/js/tinymce/tinymce.min.js"></script>
+    <script>tinymce.init({
+        selector: 'textarea',
+        language: 'zh_CN',
+        /*
+         plugins: 'textcolor colorpicker image imagetools paste',
+         toolbar: 'forecolor image paste',
+         file_browser_callback_types: 'image media',
+         automatic_uploads: true,
+         paste_date_images: true,
+         image_upload_url: '/admin/blog/uploadImage',
+         //imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
+         file_browser_callback: function(field_name, url, type, win) {
+         win.document.getElementById(field_name).value = 'my browser value';
+         }
+         */
+        automatic_uploads: false,
+        images_upload_url: '/admin/blog/uploadImage',
+        plugins: "image imagetools paste",
+        images_upload_credentials: true,
+        paste_data_images: true,
+        file_browser_callback: function(field_name, url , type, win){
+            alert("file browser callback");
+        },
+        file_picker_callback: function(callback, value, meta){
+            alert(meta.filetype);
+            callback('myimage.jpg', {alt: 'My alt text'});
+        }
+    });</script>
+    <script type="text/javascript">
+        $(function () {
+
+        })
+    </script>
+    <style type="text/css">
+        #content {
+            height: 500px;
+        }
+    </style>
+</head>
+<body>
+<form method="post"  action="/admin/activity/create">
+    标题 <input type="text" name="caption" id="caption"/>
+    地点<input type="text" name="location" id="location"/>
+    开始时间<input type="datetime" name="datestart" id="datestart"/>
+    结束时间<input type="datetime" name="dateend" id="dateend"/>
+    价格<input type="number" name="price" id="price"/>
+    <textarea name="content" id="content"></textarea><br/>
+    <input type="submit" value="创建"/>
+</form>
+
+</body>
+</html>
