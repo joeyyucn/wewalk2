@@ -1,59 +1,82 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>CREATE</title>
-    <script src="/static/js/jquery-1.12.0.min.js"></script>
-    <script src="/static/js/tinymce/tinymce.min.js"></script>
-    <script>tinymce.init({
-        selector: 'textarea',
-        language: 'zh_CN',
-        /*
-         plugins: 'textcolor colorpicker image imagetools paste',
-         toolbar: 'forecolor image paste',
-         file_browser_callback_types: 'image media',
-         automatic_uploads: true,
-         paste_date_images: true,
-         image_upload_url: '/admin/blog/uploadImage',
-         //imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
-         file_browser_callback: function(field_name, url, type, win) {
-         win.document.getElementById(field_name).value = 'my browser value';
-         }
-         */
-        automatic_uploads: false,
-        images_upload_url: '/admin/blog/uploadImage',
-        plugins: "image imagetools paste",
-        images_upload_credentials: true,
-        paste_data_images: true,
-        file_browser_callback: function(field_name, url , type, win){
-            alert("file browser callback");
-        },
-        file_picker_callback: function(callback, value, meta){
-            alert(meta.filetype);
-            callback('myimage.jpg', {alt: 'My alt text'});
-        }
-    });</script>
-    <script type="text/javascript">
-        $(function () {
+{extend name="public:base"/}
 
-        })
-    </script>
-    <style type="text/css">
-        #content {
-            height: 500px;
-        }
-    </style>
-</head>
-<body>
-<form method="post"  action="/admin/activity/create">
-    标题 <input type="text" name="caption" id="caption"/>
-    地点<input type="text" name="location" id="location"/>
-    开始时间<input type="datetime" name="datestart" id="datestart"/>
-    结束时间<input type="datetime" name="dateend" id="dateend"/>
-    价格<input type="number" name="price" id="price"/>
-    <textarea name="content" id="content"></textarea><br/>
-    <input type="submit" value="创建"/>
-</form>
+{block name="title"}管理{/block}
 
-</body>
-</html>
+{block name="header"}
+<script src="/static/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+
+        //  initialize TINYMCE
+        tinymce.init({
+            selector: 'textarea',
+            language: 'zh_CN',
+            automatic_uploads: false,
+            images_upload_url: '/admin/blog/uploadImage',
+            plugins: "image imagetools paste",
+            images_upload_credentials: true,
+            paste_data_images: true
+        });
+
+        //  register cover preview
+        function viewImage(file){
+            if(file != undefined)
+            {
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $("#coverpreview").attr("src", evt.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+            else
+            {
+                $("#coverpreview").attr("src", "");
+            }
+        }
+
+        $("#cover").on("change", function(){
+           viewImage(this.files[0]);
+        });
+    });
+</script>
+{/block}
+
+{block name="tab"}new_activity{/block}
+
+{block name="content"}
+<div class="content">
+    <form method="post"  action="/admin/activity/create">
+        <div class="form-group">
+            <label for="caption">标题</label>
+            <input type="text" class="form-control" id="caption" name="caption" placeholder="标题"/>
+        </div>
+        <div class="form-group">
+            <label for="location">目的地</label>
+            <input type="text" class="form-control" id="location" name="address" placeholder="目的地"/>
+        </div>
+        <div class="form-group">
+            <label for="datestart">开始时间</label>
+            <input type="datetime" class="form-control" id="datestart" name="datestart" placeholder="YYYY-MM-DD HH:MM:SS"/>
+        </div>
+        <div class="form-group">
+            <label for="dateend">结束时间</label>
+            <input type="datetime" class="form-control" id="dateend" name="dateend" placeholder="YYYY-MM-DD HH:MM:SS"/>
+        </div>
+        <div class="form-group">
+            <label for="price">价格</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="￥"/>
+        </div>
+        <textarea name="content" id="content" class="mce_edit_panel"></textarea><br/>
+        <div class="form-group">
+            <label for="cover">封面图片<mark>比例为4:3</mark></label>
+            <input type="file" class="form-control" id="cover" name="cover" />
+        </div>
+    </form>
+    <div style="text-align: center;">
+        <img id="coverpreview" src="" class="cover_preview"/>
+    </div>
+
+    <button id="publishactivity" class="btn btn-primary " style="float:right;">发布活动</button>
+    <button id="saveactivity" class="btn btn-info" style="float:right;">保存活动</button>
+</div>
+{/block}

@@ -1,0 +1,21 @@
+.index-bg
+{
+    background:#f9f9f9;
+}
+
+.content-bg
+{
+    background: white;
+}
+
+.center
+{
+    text-align: center;
+}
+
+.recommend-activity
+{
+    margin-top: 20px;
+    padding-bottom: 20px;
+    background: white;
+}
