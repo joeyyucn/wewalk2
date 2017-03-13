@@ -32,8 +32,9 @@ class Activity extends  Controller
         {
             return $this->fetch();
         }
-        elseif($request->isPost())
+        elseif($request->isPost() and $request->isAjax())
         {
+            $id = $request->param("id");
             $caption  = $request->param("caption");
             $location  = $request->param("location");
             $start_time = $request->param("datestart");
@@ -49,15 +50,37 @@ class Activity extends  Controller
             if(!empty($caption) and !empty($location) and !empty($start_time)
                 and !empty($end_time) and !empty($price) and !empty($content))
             {
+                $is_update = false;
                 $activity = new ActivityModel();
+                if($id >= 0)
+                {
+                    $activity->id = $id;
+                    $is_update = true;
+                }
                 $activity->caption = $caption;
                 $activity->location = $location;
                 $activity->start = $start_time->format("Y-m-d H:i:s");
                 $activity->end = $end_time->format("Y-m-d H:i:s");
                 $activity->price = $price;
                 $activity->content = $content;
-                $activity->save();
-                echo "保存成功";
+                $activity->status = 0;
+                if($request->param("publish") == 'on')
+                {
+                    $activity->status = 1;
+                }
+
+                if(!empty($_FILES['cover']['name']))
+                {
+                    $activity->cover = upload_image("images/activity/", (string)time());
+                }
+
+                $activity->isUpdate($is_update)->save();
+
+                return ['result'=> 0, 'id'=>$activity->getData('id')];
+            }
+            else
+            {
+                return ['result'=> -1, 'error'=>'invalid request' ];
             }
         }
 

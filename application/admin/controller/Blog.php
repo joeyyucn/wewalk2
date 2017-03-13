@@ -85,7 +85,7 @@ class Blog extends Controller
 
     public function uploadImage(Request $request)
     {
-        $path = upload_image("images/blog/");
-        echo json_encode(["location" => "/$path"]);
+        $path = upload_image("images/blog/", (string)time());
+        return ["location" => "/$path"];
     }
 }

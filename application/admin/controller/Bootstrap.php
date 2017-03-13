@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 
 use think\Controller;
+use think\Request;
 class Bootstrap extends Controller
 {
     public function index()
@@ -19,5 +20,18 @@ class Bootstrap extends Controller
     public function base()
     {
         return $this->fetch("public:base");
+    }
+
+    public function ajax(Request $request)
+    {
+        if($request->isGet())
+        {
+            return $this->fetch();
+        }
+        elseif($request->isAjax())
+        {
+            //header("Content-Type:application/json; charset=utf-8");
+            return ['result'=>0, 'message'=>'hello this is an ajax handler'];
+        }
     }
 }

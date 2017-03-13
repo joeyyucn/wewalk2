@@ -11,7 +11,7 @@
 
 // 应用公共文件
 
-function upload_image($path)
+function upload_image($path, $name)
 {
     reset($_FILES);
     $temp = current($_FILES);
@@ -26,7 +26,9 @@ function upload_image($path)
     {
         throw new Exception("Invalid file name");
     }
-    $full_file_path = $path.$temp['name'];
+    $explods = explode('.', $temp['name']);
+    $ext = $explods[count($explods)-1];
+    $full_file_path = $path.$name.'.'.$ext;
     move_uploaded_file($temp['tmp_name'], $full_file_path);
 
     return $full_file_path;

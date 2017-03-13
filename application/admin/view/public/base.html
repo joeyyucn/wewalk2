@@ -10,6 +10,27 @@
     <script src="/static/js/bootstrap.js"></script>
     <script src="/static/js/holder.js"></script>
     <script type="text/javascript">
+        function showMessage(message, type)
+        {
+            $("#infobar").stop();
+            $("#infobar").hide();
+            $("#infobar").css('opacity', 100);
+            $("#infobar").children("span").text(message);
+            switch (type)
+            {
+                case 0:
+                    $("#infobar").removeClass("alert-danger").addClass("alert-success");
+                    break;
+                default:
+                    $("#infobar").removeClass("alert-success").addClass("alert-danger");
+                    break;
+            }
+            $("#infobar").show();
+            $("#infobar").fadeTo(3000, 0, function(){
+                $(this).hide();
+            });
+        }
+
         $(function(){
             $("#{block name="tab"}{/block}").addClass("active");
             $("#{block name="tab"}{/block}").children("a").attr("href", "#");
@@ -28,6 +49,11 @@
         </div>
     </nav>
     <div class="container-fluid">
+
+        <div class="info_bar alert" id="infobar">
+            <span id="message"></span>
+        </div>
+
         <div class="row">
             <div class="col-xs-3 col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
@@ -36,8 +62,8 @@
                 </ul>
 
                 <ul class="nav nav-sidebar">
+                    <li id="manage_activity"><a href="/admin/activity/index">管理活动</a></li>
                     <li id="new_activity"><a href="/admin/activity/create">新活动</a></li>
-                    <li id="manage_activity"><a href="/admin/activity/view">管理活动</a></li>
                 </ul>
 
                 <ul class="nav nav-sidebar">
@@ -47,7 +73,7 @@
             </div>
 
             <div class="col-xs-9 col-xs-offset-3 col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2">
-                <div>
+                <div class="content_panel">
                     {block name="content"}{/block}
                 </div>
             </div>

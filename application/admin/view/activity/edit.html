@@ -1,40 +1,130 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>CREATE</title>
-    <script src="/static/js/jquery-1.12.0.min.js"></script>
-    <script src="/static/js/tinymce/tinymce.min.js"></script>
-    <script>tinymce.init({
-        selector: 'textarea',
-        language: 'zh_CN',
-        automatic_uploads: false,
-        images_upload_url: '/admin/blog/uploadImage',
-        plugins: "image imagetools paste",
-        images_upload_credentials: true,
-        paste_data_images: true,
-    });</script>
-    <script type="text/javascript">
-        $(function () {
+{extend name="public:base"/}
 
-        })
-    </script>
-    <style type="text/css">
-        #content {
-            height: 500px;
+{block name="title"}管理{/block}
+
+{block name="header"}
+<script src="/static/js/tinymce/tinymce.min.js"></script>
+<script type="text/javascript">
+    $(document).on('focusin', function(e) {
+        if ($(e.target).closest(".mce-window, .moxman-window").length) {
+            e.stopImmediatePropagation();
         }
-    </style>
-</head>
-<body>
-<form method="post"  action="/admin/activity/edit">
-    标题 <input type="text" name="caption" id="caption" value="{$activity.caption}"/><br/>
-    地点<input type="text" name="location" id="location" value="{$activity.location}"/><br/>
-    开始时间<input type="datetime" name="datestart" id="datestart" value="{$activity.start}"/><br/>
-    结束时间<input type="datetime" name="dateend" id="dateend" value="{$activity.end}"/><br/>
-    价格<input type="number" name="price" id="price" value="{$activity.price}"/><br/>
-    <textarea name="content" id="content">{$activity.content}</textarea><br/>
-    <input type="submit" value="保存"/>
-</form>
+    });
 
-</body>
-</html>
+    $(function () {
+
+        //  initialize TINYMCE
+        tinymce.init({
+            selector: 'textarea',
+            language: 'zh_CN',
+            automatic_uploads: false,
+            images_upload_url: '/admin/blog/uploadImage',
+            plugins: "image imagetools paste",
+            images_upload_credentials: true,
+            paste_data_images: true
+        });
+
+        //  register cover preview
+        function viewImage(file){
+            if(file != undefined)
+            {
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $("#coverpreview").attr("src", evt.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+            else
+            {
+                $("#coverpreview").attr("src", "");
+            }
+        }
+
+        $("#cover").on("change", function(){
+            viewImage(this.files[0]);
+        });
+
+        $("#btn_save").click(function(){
+            tinymce.triggerSave();
+            var data = new FormData($("#form_activity")[0])
+
+            $.ajax(
+                {
+                    url: "/admin/activity/create",
+                    data: data,
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                showMessage("保存成功", 0);
+                                $("#activity_id").val(data.id);
+                                break;
+                            case -1:
+                                showMessage("保存失败", 1);
+                                break;
+                        }
+                    },
+                    fail: function ()
+                    {
+                        showMessage("保存失败", 1);
+                    }
+
+                }
+            )
+        });
+
+
+    });
+</script>
+{/block}
+
+{block name="tab"}manage_activity{/block}
+
+{block name="content"}
+<div class="content" style="position: relative;">
+    <ol class="breadcrumb">
+        <li><a href="/admin/activity/">管理活动</a></li>
+        <li>编辑</li>
+    </ol>
+    <form method="post"  action="/admin/activity/create"  id="form_activity">
+        <input type="hidden" name="id" id="activity_id" value="{$activity.id}"/>
+        <div class="form-group">
+            <label for="caption">标题</label>
+            <input type="text" class="form-control" id="caption" name="caption" placeholder="标题" value="{$activity.caption}"/>
+        </div>
+        <div class="form-group">
+            <label for="location">目的地</label>
+            <input type="text" class="form-control" id="location" name="location" placeholder="目的地" value="{$activity.location}"/>
+        </div>
+        <div class="form-group">
+            <label for="datestart">开始时间</label>
+            <input type="datetime" class="form-control" id="datestart" name="datestart" placeholder="YYYY-MM-DD HH:MM:SS" value="{$activity.start}"/>
+        </div>
+        <div class="form-group">
+            <label for="dateend">结束时间</label>
+            <input type="datetime" class="form-control" id="dateend" name="dateend" placeholder="YYYY-MM-DD HH:MM:SS" value="{$activity.end}"/>
+        </div>
+        <div class="form-group">
+            <label for="price">价格</label>
+            <input type="text" class="form-control" id="price" name="price" placeholder="￥" value="{$activity.price}"/>
+        </div>
+        <textarea name="content" id="content" class="mce_edit_panel">{$activity.content}</textarea><br/>
+        <div class="form-group">
+            <label for="cover">封面图片<mark>比例为4:3</mark></label>
+            <input type="file" class="form-control" id="cover" name="cover" />
+        </div>
+        <div style="text-align: center;">
+            <img id="coverpreview" src="/{$activity.cover}" class="cover_preview"/>
+        </div>
+
+        <label class="checkbox-inline">
+            <input class="pull-right" type="checkbox" id="publish" name="publish" {if condition="$activity.status eq '1'"}checked{/if}>发布
+        </label>
+    </form>
+
+    <button class="btn btn-info pull-right" id="btn_save">保存活动</button>
+</div>
+{/block}

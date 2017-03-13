@@ -5,6 +5,12 @@
 {block name="header"}
 <script src="/static/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
+    $(document).on('focusin', function(e) {
+        if ($(e.target).closest(".mce-window, .moxman-window").length) {
+            e.stopImmediatePropagation();
+        }
+    });
+
     $(function () {
 
         //  initialize TINYMCE
@@ -37,6 +43,40 @@
         $("#cover").on("change", function(){
            viewImage(this.files[0]);
         });
+
+        $("#btn_save").click(function(){
+            tinymce.triggerSave();
+            var data = new FormData($("#form_activity")[0])
+
+            $.ajax(
+                {
+                    url: "/admin/activity/create",
+                    data: data,
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                showMessage("保存成功", 0);
+                                $("#activity_id").val(data.id);
+                                break;
+                            case -1:
+                                showMessage("保存失败", 1);
+                                break;
+                        }
+                    },
+                    fail: function ()
+                    {
+                        showMessage("保存失败", 1);
+                    }
+
+                }
+            )
+        });
+
+
     });
 </script>
 {/block}
@@ -44,15 +84,20 @@
 {block name="tab"}new_activity{/block}
 
 {block name="content"}
-<div class="content">
-    <form method="post"  action="/admin/activity/create">
+<div class="content " style="position: relative;">
+    <ol class="breadcrumb">
+        <li><a href="/admin/activity/">管理活动</a></li>
+        <li>新建</li>
+    </ol>
+    <form method="post"  action="/admin/activity/create"  id="form_activity">
+        <input type="hidden" name="id" id="activity_id" value="-1"/>
         <div class="form-group">
             <label for="caption">标题</label>
             <input type="text" class="form-control" id="caption" name="caption" placeholder="标题"/>
         </div>
         <div class="form-group">
             <label for="location">目的地</label>
-            <input type="text" class="form-control" id="location" name="address" placeholder="目的地"/>
+            <input type="text" class="form-control" id="location" name="location" placeholder="目的地"/>
         </div>
         <div class="form-group">
             <label for="datestart">开始时间</label>
@@ -71,12 +116,15 @@
             <label for="cover">封面图片<mark>比例为4:3</mark></label>
             <input type="file" class="form-control" id="cover" name="cover" />
         </div>
-    </form>
-    <div style="text-align: center;">
-        <img id="coverpreview" src="" class="cover_preview"/>
-    </div>
+        <div style="text-align: center;">
+            <img id="coverpreview" src="" class="cover_preview"/>
+        </div>
 
-    <button id="publishactivity" class="btn btn-primary " style="float:right;">发布活动</button>
-    <button id="saveactivity" class="btn btn-info" style="float:right;">保存活动</button>
+        <label class="checkbox-inline">
+            <input class="pull-right" type="checkbox" id="publish" name="publish"/>发布
+        </label>
+    </form>
+
+    <button class="btn btn-info pull-right" id="btn_save">保存活动</button>
 </div>
 {/block}
