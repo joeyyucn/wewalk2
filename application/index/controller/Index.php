@@ -8,4 +8,9 @@ class Index extends Controller
     {
         return $this->fetch();
     }
+
+    public function base()
+    {
+        return $this->fetch('D:\git\wewalk2\application\index\view\public\base.html');
+    }
 }
