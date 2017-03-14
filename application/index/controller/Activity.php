@@ -15,13 +15,24 @@ class Activity extends Controller
 {
     public function index()
     {
+        $this->assign("activities", ActivityModel::all());
         return $this->fetch();
     }
 
     public function view(Request $request)
     {
-        $activities = ActivityModel::all();
-        $this->assign("activities", $activities);
-        return $this->fetch();
+        $id = $request->param("id");
+        $found = false;
+        if(!empty($id))
+        {
+          $activity = ActivityModel::get($id);
+          if(!empty($activity))
+          {
+              $this->assign("activity", $activity);
+              return $this->fetch();
+          }
+        }
+
+        $this->redirect("/index/activity/index");
     }
 }

@@ -11,6 +11,6 @@ class Index extends Controller
 
     public function base()
     {
-        return $this->fetch('D:\git\wewalk2\application\index\view\public\base.html');
+        return $this->fetch('D:\php\workspace\wewalk2\application\index\view\public\base.html');
     }
 }

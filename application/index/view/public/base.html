@@ -12,14 +12,11 @@
 
     <script type="text/javascript">
         $(function(){
-            //$('#{block name="tab"}{/block}').addClass("active").children("a").attr("href", "#");
+            $('#{block name="tab"}{/block}').addClass("active").children("a").attr("href", "#");
         })
     </script>
-
     {block name="header"}
-
     {/block}
-
 </head>
 <body class="index-bg">
 
@@ -35,14 +32,18 @@
         </div>
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right">
-                <li id="page_index"><a href="#">主页</a></li>
-                <li id="page_activity"><a href="#">活动</a></li>
+                <li id="page_index"><a href="/">主页</a></li>
+                <li id="page_activity"><a href="/index/activity/index">活动</a></li>
                 <li id="page_blog"><a href="#">游记</a></li>
                 <li id="page_aboutus"><a href="#">我们</a></li>
             </ul>
         </div>
     </div>
 </nav>
+<div>
+    {block name="content"}{/block}
+</div>
+
 <footer>
 </footer>
 </body>

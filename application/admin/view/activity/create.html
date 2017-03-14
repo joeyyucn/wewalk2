@@ -17,9 +17,10 @@
         tinymce.init({
             selector: 'textarea',
             language: 'zh_CN',
-            automatic_uploads: false,
+            automatic_uploads: true,
             images_upload_url: '/admin/blog/uploadImage',
-            plugins: "image imagetools paste",
+            plugins: "image imagetools paste textcolor colorpicker",
+            toolbar: "forecolor backcolor",
             images_upload_credentials: true,
             paste_data_images: true
         });

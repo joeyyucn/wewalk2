@@ -1,0 +1,68 @@
+{extend name="public:base" /}
+
+{block name="title"}活动{/block}
+
+{block name="tab"}page_activity{/block}
+
+{block name="header"}
+<style>
+    .activity-caption
+    {
+        color: green;
+        text-align: center;
+    }
+
+    .activity-content
+    {
+        max-width:100%;
+        overflow-wrap: break-word;
+        background: white;
+        padding-bottom: 25px;
+        padding-top: 25px;
+        margin-bottom: 20px;
+        border-radius:10px;
+    }
+
+    @media (min-width: 768px)
+    {
+            .activity-content
+            {
+                padding-left:50px;
+                padding-right:50px;
+            }
+    }
+
+    @media (max-width: 767px)
+    {
+        .activity-content
+        {
+            padding-left:25px;
+            padding-right:25px;
+        }
+    }
+
+    img
+    {
+        max-width: 100%;
+        height: auto;
+    }
+
+</style>
+{/block}
+{block name="content"}
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/index/activity/">全部活动</a></li>
+        <li class="active">浏览</li>
+    </ol>
+    <h1 class="activity-caption">{$activity.caption}</h1>
+    <div class="activity-content">
+        <p class="input-lg text-primary">地点: {$activity.location}</p>
+        <p class="input-lg text-primary">时间: {$activity.start} 到 {$activity.end}</p>
+        <p class="input-lg text-primary">价格: {$activity.price}</p>
+    </div>
+    <div class="activity-content">
+        {$activity.content}
+    </div>
+</div>
+{/block}

@@ -1,0 +1,37 @@
+{extend name="public:base" /}
+
+{block name="title"}活动{/block}
+
+{block name="tab"}page_activity{/block}
+
+{block name="header"}
+{/block}
+
+{block name="content"}
+<div class="container">
+    <ol class="breadcrumb">
+        <li class="active">全部活动</li>
+    </ol>
+
+
+    {foreach name="activities" item="activity"}
+        {if condition="$key%3 eq '0'"}
+    <div class="row text-center">
+        {/if}
+        <div class="col-sm-4">
+            <div class="activity-list-item">
+                <a href="/index/activity/view?id={$activity.id}"><img src="/{$activity.cover}"/></a>
+                <a href="/index/activity/view?id={$activity.id}">{$activity.caption}</a>
+            </div>
+        </div>
+        {if condition="$key%3 eq '2'"}
+        </div>
+        {/if}
+    {/foreach}
+
+    {eq name="$activities|count" value="3"}
+    {else/}
+    </div>
+    {/eq}
+
+{/block}
