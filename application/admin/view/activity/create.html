@@ -5,32 +5,12 @@
 {block name="header"}
 <script src="/static/js/tinymce/tinymce.min.js"></script>
 <script type="text/javascript">
-    $(document).on('focusin', function(e) {
-        if ($(e.target).closest(".mce-window, .moxman-window").length) {
-            e.stopImmediatePropagation();
-        }
-    });
+
 
     $(function () {
 
-        //  initialize TINYMCE
-        tinymce.init({
-            selector: 'textarea',
-            language: 'zh_CN',
-            automatic_uploads: true,
-            images_upload_url: '/admin/blog/uploadImage',
-            plugins: [
-                'advlist autolink lists link image charmap print preview hr anchor pagebreak',
-                'searchreplace wordcount visualblocks visualchars code fullscreen',
-                'insertdatetime media nonbreaking save table contextmenu directionality',
-                'emoticons template paste textcolor colorpicker textpattern imagetools codesample toc'
-            ],
-            toolbar1: 'undo redo | insert | styleselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | link image',
-            toolbar2: 'print preview media | forecolor backcolor emoticons | codesample',
-            images_upload_credentials: true,
-            paste_data_images: true
-        });
-
+        {include file="public/tinymce"/}
+        $("#content").show();
         //  register cover preview
         function viewImage(file){
             if(file != undefined)
@@ -74,7 +54,7 @@
                                 break;
                         }
                     },
-                    fail: function ()
+                    error : function (data)
                     {
                         showMessage("保存失败", 1);
                     }
@@ -118,7 +98,7 @@
             <label for="price">价格</label>
             <input type="text" class="form-control" id="price" name="price" placeholder="￥"/>
         </div>
-        <textarea name="content" id="content" class="mce_edit_panel"></textarea><br/>
+        <textarea name="content" id="content" class="mce_edit_panel" style="display: none;"></textarea><br/>
         <div class="form-group">
             <label for="cover">封面图片<mark>比例为4:3</mark></label>
             <input type="file" class="form-control" id="cover" name="cover" />

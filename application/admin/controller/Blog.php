@@ -29,20 +29,36 @@ class Blog extends Controller
         {
             $caption = $request->param("caption");
             $content = $request->param("content");
+            $publish = $request->param("publish");
+            $id = $request->param("id");
+            if(!empty($caption) && !empty($content) && !empty($id))
+            {
+                $beUpdate = $id != -1;
+                $blog = new BlogModel();
+                $blog->caption = $caption;
+                $blog->content = $content;
+                if($beUpdate)
+                    $blog->id = $id;
 
-            $blog = new BlogModel();
-            $blog->caption = $caption;
-            $blog->content = $content;
+                if($publish == "on")
+                    $blog->status = 1;
 
-            $blog->save();
-            return $content;
+                if(!empty($_FILES['cover']['name']))
+                {
+                    $blog->cover = upload_image("images/blog/", (string)time());
+                }
+
+                $blog->isUpdate($beUpdate)->save();
+
+
+                return ["result"=>0, "id"=>$blog->getData("id")];
+            }
+            return ["result"=>-1, "error"=>"invalid request"];
         }
     }
 
     public function edit(Request $request)
     {
-        if($request->isGet())
-        {
             $blog_id = $request->param("id");
             if(!empty($blog_id))
             {
@@ -53,20 +69,7 @@ class Blog extends Controller
                     return $this->fetch();
                 }
             }
-        }
-        else if($request->isPost())
-        {
-            $id = $request->param("id");
-            $caption = $request->param("caption");
-            $content = $request->param("content");
-            $blog = BlogModel::get($id);
-            if(!empty($blog))
-            {
-                $blog->content = $content;
-                $blog->caption = $caption;
-                $blog->save();
-            }
-        }
+            return "doesn't exist! STUPID";
     }
 
     public function view(Request $request)

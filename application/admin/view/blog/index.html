@@ -1,16 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<ul>
-    <li><a href="/admin/blog/index">Index</a></li>
-    <li><a href="/admin/blog/create">New</a></li>
-</ul>
-{volist name="blogs" id="blog"}
-    <a href="/admin/blog/view?id={$blog.id}">{$blog.caption}</a><a href="/admin/blog/edit?id={$blog.id}">Edit</a><br/>
-{/volist}
-</body>
-</html>
+{extend name="public:base"/}
+
+{block name="title"}管理游记{/block}
+
+{block name="tab"}manage_blog{/block}
+{block name="header"}
+
+{/block}
+{block name="content"}
+<div class="content">
+    <ol class="breadcrumb"><li>管理游记</li></ol>
+    <label class="text-info">当前一共有<strong>{$blogs|count}</strong>条游记 </label>
+    <span class="text-info pull-right"><a href="/admin/blog/create">新建</a></span>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>标题</td>
+            <td>状态</td>
+            <td>编辑</td>
+            <td>删除</td>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="blogs" id="blog"}
+        {if condition="$blog.status eq 0"}
+        <tr class="">
+            {else/}
+        <tr class="success">
+            {/if}
+
+            <td>{$blog.id}</td>
+            <td>{$blog.caption}</td>
+            <td>
+                {switch name="$blog.status"}
+                {case value='0'}未发布{/case}
+                {case value='1'}已发布{/case}
+                {/switch}
+            </td>
+            <td><a href="/admin/blog/edit?id={$blog.id}"><span class="glyphicon glyphicon-edit"></span></a></td>
+            <td><a class="delete-blog-link" href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+</div>
+{/block}

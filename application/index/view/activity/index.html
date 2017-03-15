@@ -29,9 +29,7 @@
         {/if}
     {/foreach}
 
-    {eq name="$activities|count" value="3"}
-    {else/}
-    </div>
-    {/eq}
+    <?php if(count($activities)%3 != 2) echo "</div>"?>
+</div>
 
 {/block}

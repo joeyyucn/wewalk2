@@ -51,8 +51,9 @@
 
 .cover_preview
 {
-    max-width: 480px;
-    max-height: 320px;
+    width: 100%;
+    max-width: 370px;
+    height: auto;
 }
 
 .info_bar

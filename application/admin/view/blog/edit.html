@@ -1,56 +1,98 @@
-<!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/html">
-<head>
-    <meta charset="UTF-8">
-    <title>CREATE</title>
-    <script src="/static/js/jquery-1.12.0.min.js"></script>
-    <script src="/static/js/tinymce/tinymce.min.js"></script>
-    <script>tinymce.init({
-        selector: 'textarea',
-        language: 'zh_CN',
-        /*
-         plugins: 'textcolor colorpicker image imagetools paste',
-         toolbar: 'forecolor image paste',
-         file_browser_callback_types: 'image media',
-         automatic_uploads: true,
-         paste_date_images: true,
-         image_upload_url: '/admin/blog/uploadImage',
-         //imagetools_toolbar: "rotateleft rotateright | flipv fliph | editimage imageoptions",
-         file_browser_callback: function(field_name, url, type, win) {
-         win.document.getElementById(field_name).value = 'my browser value';
-         }
-         */
-        automatic_uploads: true,
-        images_upload_url: '/admin/blog/uploadImage',
-        plugins: "image imagetools paste",
-        images_upload_credentials: true,
-        paste_data_images: true,
-        file_browser_callback: function(field_name, url , type, win){
-            alert("file browser callback");
-        },
-        file_picker_callback: function(callback, value, meta){
-            alert(meta.filetype);
-            callback('myimage.jpg', {alt: 'My alt text'});
-        }
-    });</script>
-    <script type="text/javascript">
-        $(function () {
+{extend name="public:base"/}
 
-        })
-    </script>
-    <style type="text/css">
-        #content {
-            height: 500px;
-        }
-    </style>
-</head>
-<body>
-<form method="post"  action="/admin/blog/edit">
-    <input type="hidden" name="id" id="id" value="{$blog.id}"/>
-    标题 <input type="text" name="caption" id="caption" value="{$blog.caption}"/>
-    <textarea name="content" id="content">{$blog.content}</textarea><br/>
-    <input type="submit" value="保存"/>
-</form>
+{block name="title"}编辑游记{/block}
 
-</body>
-</html>
+{block name="header"}
+<script src="/static/js/tinymce/tinymce.min.js"></script>
+
+<script type="text/javascript">
+    $(function () {
+
+        {include file="public/tinymce"/}
+        $("#content").show();
+        //  register cover preview
+        function viewImage(file){
+            if(file != undefined)
+            {
+                var reader = new FileReader();
+                reader.onload = function (evt) {
+                    $("#coverpreview").attr("src", evt.target.result);
+                }
+                reader.readAsDataURL(file);
+            }
+            else
+            {
+                $("#coverpreview").attr("src", "");
+            }
+        }
+
+        $("#cover").on("change", function(){
+            viewImage(this.files[0]);
+        });
+
+        $("#btn_save").click(function(){
+            tinymce.triggerSave();
+            var data = new FormData($("#form_blog")[0])
+
+            $.ajax(
+                {
+                    url: "/admin/blog/create",
+                    data: data,
+                    type: 'POST',
+                    processData: false,
+                    contentType: false,
+                    dataType: 'json',
+                    success: function (data) {
+                        switch (data.result) {
+                            case 0:
+                                showMessage("保存成功", 0);
+                                $("#activity_id").val(data.id);
+                                break;
+                            case -1:
+                                showMessage("保存失败", 1);
+                                break;
+                        }
+                    },
+                    error : function (data)
+                    {
+                        showMessage("保存失败", 1);
+                    }
+
+                }
+            )
+        });
+    });
+</script>
+{/block}
+
+{block name="tab"}manage_blog{/block}
+
+{block name="content"}
+<div class="content " style="position: relative;">
+    <ol class="breadcrumb">
+        <li><a href="/admin/blog/">管理游记</a></li>
+        <li>编辑</li>
+    </ol>
+    <form method="post"  action="/admin/blog/create"  id="form_blog">
+        <input type="hidden" name="id" id="blog_id" value="{$blog.id}"/>
+        <div class="form-group">
+            <label for="caption">标题</label>
+            <input type="text" class="form-control" id="caption" name="caption" placeholder="标题" value="{$blog.caption}"/>
+        </div>
+        <textarea name="content" id="content" class="mce_edit_panel" style="display: none;">{$blog.content}</textarea><br/>
+        <div class="form-group">
+            <label for="cover">封面图片<mark>比例为4:3</mark></label>
+            <input type="file" class="form-control" id="cover" name="cover" />
+        </div>
+        <div style="text-align: center;">
+            <img id="coverpreview" src="/{$blog.cover}" class="cover_preview"/>
+        </div>
+
+        <label class="checkbox-inline">
+            <input class="pull-right" type="checkbox" id="publish" name="publish" {if condition="$blog.status eq '1'"}checked{/if}/>发布
+        </label>
+    </form>
+
+    <button class="btn btn-info pull-right" id="btn_save">保存游记</button>
+</div>
+{/block}
