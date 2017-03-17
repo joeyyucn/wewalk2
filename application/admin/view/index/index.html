@@ -6,6 +6,71 @@
 
 {block name="tab"}overall_page{/block}
 
+{block name="header"}
+<script>
+    $(function(){
+        $("#submit").click(function()
+        {
+            var data = new FormData($("#form-config")[0]);
+
+            $.ajax({
+                url:"/admin/index/index",
+                data: data,
+                type: "POST",
+                dataType: "json",
+                contentType: false,
+                processData: false,
+                success:function(data)
+                {
+                    switch (data.result) {
+                        case 0:
+                            showMessage("保存成功", 0);
+                            break;
+                        case -1:
+                            showMessage("保存失败", 1);
+                            break;
+                    }
+                },
+                error: function(data){
+                    showMessage("保存失败", 1);
+                }
+
+            })
+        });
+    });
+</script>
+{/block}
 {block name="content"}
-<h2>this is index page</h2>
+<div class="content">
+    <form id="form-config" enctype="multipart/form-data">
+        <h3>首页传送带设置</h3>
+        <div class="form-group">
+            <label for="image1">图片1</label>
+            <input type="file" class="form-control" name="image1" id="image1" value="{$config.home_carousel_link1}"/>
+        </div>
+        <div class="form-group">
+            <label for="link1">链接1</label>
+            <input type="text" class="form-control" name="link1" id="link1"/>
+        </div>
+
+        <div class="form-group">
+            <label for="image2">图片2</label>
+            <input type="file" class="form-control" name="image2" id="image2"/>
+        </div>
+        <div class="form-group">
+            <label for="link2">链接2</label>
+            <input type="text" class="form-control" name="link2" id="link2"/>
+        </div>
+
+        <div class="form-group">
+            <label for="image3">图片3</label>
+            <input type="file" class="form-control" name="image3" id="image3"/>
+        </div>
+        <div class="form-group">
+            <label for="link3">链接3</label>
+            <input type="text" class="form-control" name="link3" id="link3"/>
+        </div>
+    </form>
+    <button id="submit" class="btn btn-primary">提交</button>
+</div>
 {/block}

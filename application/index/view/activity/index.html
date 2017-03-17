@@ -21,7 +21,8 @@
         <div class="col-sm-4">
             <div class="activity-list-item">
                 <a href="/index/activity/view?id={$activity.id}"><img src="/{$activity.cover}"/></a>
-                <a href="/index/activity/view?id={$activity.id}">{$activity.caption}</a>
+                <a href="/index/activity/view?id={$activity.id}"><span>[{$activity.start|date="n月j号",###}] </span>{$activity.caption}</a>
+                <span></span>
             </div>
         </div>
         {if condition="$key%3 eq '2'"}

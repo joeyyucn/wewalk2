@@ -11,5 +11,8 @@ use think\Model;
 
 class Blog extends Model
 {
-
+    public function getcreatetimeAttr($value)
+    {
+        return strtotime($value);
+    }
 }

@@ -15,7 +15,8 @@ class Activity extends Controller
 {
     public function index()
     {
-        $this->assign("activities", ActivityModel::all());
+        $activities = ActivityModel::all();
+        $this->assign("activities", $activities);
         return $this->fetch();
     }
 
@@ -35,4 +36,5 @@ class Activity extends Controller
 
         $this->redirect("/index/activity/index");
     }
+
 }

@@ -1,0 +1,62 @@
+{extend name="public:base" /}
+
+{block name="title"}活动{/block}
+
+{block name="tab"}page_blog{/block}
+
+{block name="header"}
+<style>
+    .blog-content
+    {
+        background:white;
+        padding: 20px;
+        border-radius: 10px;
+    }
+
+    .blog-caption
+    {
+        text-align:center;
+    }
+
+    .blog-author
+    {
+        color:red;;
+    }
+
+    .blog-meta-data
+    {
+        text-align:center;
+        display: block;
+        margin-bottom: 40px;
+    }
+
+    img
+    {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+</style>
+
+<script type="text/javascript">
+    $(function(){
+    });
+</script>
+{/block}
+{block name="content"}
+<div class="container">
+    <ol class="breadcrumb">
+        <li><a href="/index/blog/">全部游记</a></li>
+        <li class="active">{$blog.caption}</li>
+    </ol>
+
+    <div class="blog-content">
+        <h1 class="blog-caption">{$blog.caption}</h1>
+        <span class="blog-meta-data">作者：<span class="blog-author">{$blog.author}</span>•{$blog.createtime|date="Y年n月j日", ###}</span>
+        <hr/>
+        <div>
+            {$blog.content}
+        </div>
+    </div>
+</div>
+{/block}

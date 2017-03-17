@@ -11,5 +11,13 @@ namespace app\admin\model;
 use think\Model;
 class Activity extends Model
 {
+    public function getStartAttr($value)
+    {
+        return strtotime($value);
+    }
 
+    public function getEndAttr($value)
+    {
+        return strtotime($value);
+    }
 }

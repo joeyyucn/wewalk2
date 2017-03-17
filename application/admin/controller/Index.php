@@ -9,10 +9,17 @@
 namespace app\admin\controller;
 
 use think\Controller;
+use think\Request;
+use app\admin\model\SiteConfig;
 class Index extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return $this->fetch();
+        if($request->isGet())
+        {
+            $config = SiteConfig::load();
+            $this->assign("config", $config);
+            return $this->fetch();
+        }
     }
 }

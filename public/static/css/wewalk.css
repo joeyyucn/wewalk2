@@ -33,12 +33,12 @@
 .activity-list-item > a
 {
     font-size:1.2em;
-    color: black;
+    color: gray;
 }
 
 .activity-list-item > a:hover
 {
-    color: green;;
+    color: green;
 }
 
 .activity-list-item > a > img
@@ -46,4 +46,35 @@
     max-width: 100%;!important;
     height: auto;!important;;
     margin-bottom: 10px;
+    border-radius: 10px 10px 0 0;
+}
+
+.text-activity-value {
+    color: #f60;
+    font-size:1.2em;
+}
+
+.text-label {
+    color:gray;
+    font-size: 1.2em;
+}
+
+.blog-entry-img
+{
+    width:100%;
+    height:auto;
+    padding: 0px;
+}
+
+.blog-entry-caption > a
+{
+    #color: #73eac4;
+}
+
+@media (max-width: 767px) {
+    .blog-entry-caption {
+        font-size: 1.5em;
+        text-align: center;
+        margin-top: 10px;
+    }
 }

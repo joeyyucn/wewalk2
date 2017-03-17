@@ -8,26 +8,30 @@
 {/block}
 
 {block name="content"}
-<div class="container">
+<div class="container" style="background:white;">
     <ol class="breadcrumb">
         <li class="active">全部游记</li>
     </ol>
     <div>
-        <div class="row center-block">
-            <div class="col-md-6">
-                <img class="pull-left" src="holder.js/300x150"/>
+    <div class="row">
+        {foreach name="blogs" item="blog"}
+        <div class="blog-entry ">
+            <div class="col-md-6 col-sm-6">
+               <a href="/index/blog/view?id={$blog.id}"> <img class="img-rounded blog-entry-img center-block" src="/{$blog.cover}"/></a>
+            </div>
+            <div class="col-md-6 col-sm-6">
                 <div>
-                    <span class="text-info">九五二七的贡嘎游记</span>
+                    <h2 class="blog-entry-caption"><a href="/index/blog/view?id={$blog.id}">{$blog.caption}</a></h2>
+                    <h3 class="hidden-xs">{$blog.author}</h3>
+                    <h3 class="hidden-sm hidden-xs">{$blog.createtime|date="n月j号",###}</h3>
                 </div>
             </div>
-            <div class="clearfix visible-sm visible-xs"></div>
-            <div class="col-md-6 center-block">
-                <img class="pull-left" src="holder.js/300x150"/>
-                <div>
-                    <span>Media heading</span>
-                </div>
-            </div>
+        </div>
+        <div class="clearfix"></div>
+        <hr style="border-color:#eee;"/>
+        {/foreach}
     </div>
+        <hr/>
 
 </div>
 {/block}
