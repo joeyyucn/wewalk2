@@ -16,12 +16,12 @@ class Index extends Controller
 
         // set featured activity
         $featuredActivity = ActivityModel::all( function($query){
-            $query->where("status", 1)->limit(3)->order('start', 'datetime');
+            $query->where("status", 1)->limit(3)->order('start', 'desc');
         });
         $this->assign("featuredactivity", $featuredActivity);
 
         $featuredBlog = BlogModel::all( function($query){
-            $query->where("status", 1)->limit(3)->order("createtime", 'datetime');
+            $query->where("status", 1)->limit(2)->order("createtime", 'desc');
         });
         $this->assign("featuredBlog", $featuredBlog);
 

@@ -35,12 +35,12 @@ lastupdate DATETIME ON UPDATE CURRENT_TIMESTAMP
 
 CREATE TABLE IF NOT EXISTS config(
 name CHAR(30) NOT NULL PRIMARY KEY,
-value CHAR(30) NOT NULL DEFAULT ''
+value CHAR(60) NOT NULL DEFAULT ''
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img1", "images/home/crousel1.jpg");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img2", "images/home/crousel2.jpg");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img3", "images/home/crousel3.jpg");
+INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img1", "images/home/home_carousel_img1.jpg");
+INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img2", "images/home/home_carousel_img2.jpg");
+INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img3", "images/home/home_carousel_img3.jpg");
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link1", "#");
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link2", "#");
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link3", "#");

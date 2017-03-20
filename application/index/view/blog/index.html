@@ -8,7 +8,7 @@
 {/block}
 
 {block name="content"}
-<div class="container" style="background:white;">
+<div class="container">
     <ol class="breadcrumb">
         <li class="active">全部游记</li>
     </ol>
@@ -16,18 +16,18 @@
     <div class="row">
         {foreach name="blogs" item="blog"}
         <div class="blog-entry ">
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6 blog-entry-img-column">
                <a href="/index/blog/view?id={$blog.id}"> <img class="img-rounded blog-entry-img center-block" src="/{$blog.cover}"/></a>
             </div>
-            <div class="col-md-6 col-sm-6">
+            <div class="col-md-6 col-sm-6 ">
                 <div>
                     <h2 class="blog-entry-caption"><a href="/index/blog/view?id={$blog.id}">{$blog.caption}</a></h2>
-                    <h3 class="hidden-xs">{$blog.author}</h3>
-                    <h3 class="hidden-sm hidden-xs">{$blog.createtime|date="n月j号",###}</h3>
+                    <h3 class="hidden-xs blog-entry-author">BY {$blog.author}</h3>
+                    <h3 class="hidden-sm hidden-xs blog-entry-date"><span style="color:red;">@</span> {$blog.createtime|date="n月j号",###}</h3>
                 </div>
             </div>
+            <div class="clearfix"></div>
         </div>
-        <div class="clearfix"></div>
         <hr style="border-color:#eee;"/>
         {/foreach}
     </div>

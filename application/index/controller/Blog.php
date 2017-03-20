@@ -15,7 +15,9 @@ class Blog extends Controller
 {
     public function index()
     {
-        $blogs =BlogModel::all();
+        $blogs =BlogModel::all( function($query){
+            $query->where("status", 1)->order("createtime", 'desc');
+        });
         $this->assign("blogs", $blogs);
         return $this->fetch();
     }

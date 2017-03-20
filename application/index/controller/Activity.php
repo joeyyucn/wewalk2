@@ -15,7 +15,9 @@ class Activity extends Controller
 {
     public function index()
     {
-        $activities = ActivityModel::all();
+        $activities = ActivityModel::all( function($query){
+            $query->where("status", 1)->order('start', 'desc');
+        });
         $this->assign("activities", $activities);
         return $this->fetch();
     }
