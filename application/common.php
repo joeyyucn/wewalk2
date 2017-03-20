@@ -11,10 +11,25 @@
 
 // 应用公共文件
 
-function upload_image($path, $name)
+/**
+ * @param $path : file path where stores the upload file
+ * @param $name :  new file path
+ * @param $index : index in $_FILES if exists otherwise null
+ * @return string : full file path
+ * @throws Exception
+ */
+function upload_image($path, $name, $index=null)
 {
-    reset($_FILES);
-    $temp = current($_FILES);
+    if(empty($index))
+    {
+        reset($_FILES);
+        $temp = current($_FILES);
+    }
+    else
+    {
+        $temp = $_FILES[$index];
+    }
+
 
     // check origin
     if(is_uploaded_file($temp['tmp_name']))

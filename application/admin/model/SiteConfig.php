@@ -9,7 +9,7 @@
 namespace app\admin\model;
 
 
-class SiteConfig
+class SiteConfig implements \ArrayAccess
 {
     private $configs = [];
 
@@ -24,7 +24,7 @@ class SiteConfig
         for($i = 0; $i < count($all_configs); $i++)
         {
             $config = $all_configs[$i];
-            $configs[$config->name] = $config->value;
+            $this->configs[$config->name] = $config->value;
         }
     }
 
@@ -43,10 +43,44 @@ class SiteConfig
     {
         $config = new Config();
         $list = [];
-        foreach ($config as $key=> $value)
+        foreach ($this->configs as $key=> $value)
         {
             $list[count($list)] = ["name"=>$key, "value"=>$value];
         }
         $config->saveAll($list);
+    }
+
+    public function saveConfig($key)
+    {
+        $config = new Config();
+        $config->name = $key;
+        $config->value = $this->configs["key"];
+        $config->isUpdate(true)->save();
+    }
+
+    public function offsetExists($name)
+    {
+
+        return isset($this->configs[$name]);
+    }
+
+    public function offsetUnset($name)
+    {
+        unset($this->configs[$name]);
+    }
+
+    public function offsetGet($name)
+    {
+        return $this->configs[$name];
+    }
+
+    public function offsetSet($name, $value)
+    {
+        $this->configs[$name] = $value;
+    }
+
+    public function toArray()
+    {
+        return  $this->configs;
     }
 }

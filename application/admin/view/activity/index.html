@@ -38,7 +38,7 @@
 
                 <td>{$activity.id}</td>
                 <td>{$activity.caption}</td>
-                <td>{$activity.start}</TD>
+                <td>{$activity.start|date="Y-m-d H:i:s",###}</TD>
                 <td>
                     {switch name="$activity.status"}
                         {case value='0'}未发布{/case}
