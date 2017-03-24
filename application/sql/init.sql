@@ -1,15 +1,6 @@
 CREATE DATABASE IF NOT EXISTS wewalk;
 USE wewalk;
 
-CREATE TABLE IF NOT EXISTS blog(
-id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
-content TEXT
-);
-
-SET @caption = "test blog";
-SET @content = "this is my first blog content";
-INSERT INTO blog(caption, content) VALUE(@caption, @content);
-
 CREATE TABLE IF NOT EXISTS activity(
 id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
 caption CHAR(60) NOT NULL, 
@@ -38,9 +29,9 @@ name CHAR(30) NOT NULL PRIMARY KEY,
 value CHAR(60) NOT NULL DEFAULT ''
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img1", "images/home/home_carousel_img1.jpg");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img2", "images/home/home_carousel_img2.jpg");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img3", "images/home/home_carousel_img3.jpg");
+INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img1", "images/config/home_carousel_img1.jpg");
+INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img2", "images/config/home_carousel_img2.jpg");
+INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img3", "images/config/home_carousel_img3.jpg");
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link1", "#");
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link2", "#");
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link3", "#");
