@@ -2,7 +2,7 @@
 
 {block name="title"}活动{/block}
 
-{block name="tab"}page_activity{/block}
+{block name="tab"}destinations{/block}
 
 {block name="header"}
 {/block}
@@ -16,21 +16,22 @@
 
     {foreach name="activities" item="activity"}
         {if condition="$key%3 eq '0'"}
-    <div class="row text-center">
+    <div class="destintn-grids">
         {/if}
-        <div class="col-sm-4">
-            <div class="activity-list-item">
-                <a href="/index/activity/view?id={$activity.id}"><img src="/{$activity.cover}"/></a>
-                <a href="/index/activity/view?id={$activity.id}"><span>[{$activity.start|date="n月j号",###}] </span>{$activity.caption}</a>
-                <span></span>
+        <div class="col-md-4 desti-grid">
+            <a class="example-image-link" href="/{$activity.cover}" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="/{$activity.cover}" alt=""/></a>
+            <div class="desti-info">
+                <h5><a href="/index/activity/view?id={$activity.id}">{$activity.caption}</a></h5>
+                <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
             </div>
         </div>
         {if condition="$key%3 eq '2'"}
+            <div class="clearfix"></div>
         </div>
         {/if}
     {/foreach}
 
-    <?php if(count($activities)%3 != 2) echo "</div>"?>
+    <?php if(count($activities)%3 != 0) echo "<div class='clearfix'></div></div>"?>
 </div>
 
 {/block}

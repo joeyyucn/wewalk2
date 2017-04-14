@@ -2,91 +2,219 @@
 
 {block name="title"}主页{/block}
 
-{block name="tab"}page_index{/block}
+{block name="tab"}index{/block}
 
 {block name="header"}
 {/block}
 
 {block name="content"}
 
-<div class="container">
-    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-            <li data-target="#carousel-example-generic" data-slide-to="0" class="active"></li>
-            <li data-target="#carousel-example-generic" data-slide-to="1" ></li>
-            <li data-target="#carousel-example-generic" data-slide-to="2" ></li>
-        </ol>
-
-        <div class="carousel-inner" role="listbox">
-            <div class="item active">
-                <a href="{$config.home_carousel_link1}"><img class="carousel_img" src="/{$config.home_carousel_img1}"/></a>
-            </div>
-            <div class="item">
-                <a href="{$config.home_carousel_link2}"><img class="carousel_img" src="/{$config.home_carousel_img2}"/></a>
-            </div>
-            <div class="item">
-                <a href="{$config.home_carousel_link3}"><img class="carousel_img" src="/{$config.home_carousel_img3}"/></a>
-            </div>
-        </div>
-    </div>
+<!---->
+<div class="banner">
+     <div class="container">
+         <div class="banner-grids">
+            <div class="col-md-6 banner-grid grid1">
+                  <div class="package">
+                     <h3><a href="#">国内</a></h3>
+                     <ul>
+                         <li><a href="#">Washington, </a></li>
+                         <li><a href="#">Houston, </a></li>
+                         <li><a href="#">Los angeles</a></li>
+                     </ul>
+                     <span class="glyphicon1 glyphicon-globe" aria-hidden="true"></span>
+                 </div>
+             </div>
+             <div class="col-md-6 banner-grid">
+                 <div class="package">
+                     <h3><a href="#">国际</a></h3>
+                     <ul>
+                         <li><a href="#">Hong Kong, </a></li>
+                         <li><a href="#">Germany, </a></li>
+                         <li><a href="#">Italy</a></li>
+                     </ul>
+                     <span class="glyphicon1 glyphicon-plane" aria-hidden="true"></span>
+                 </div>
+             </div>
+             <div class="clearfix"></div>
+         </div>
+     </div>
 </div>
-
-<h2 class="index-activity-title center">活动推荐</h2>
-<div class="container recommend-activity">
-    <div>
-        {foreach name="featuredactivity" item="activity"}
-        {if condition="$key%3 eq '0'"}
-        <div class="row text-center">
-            {/if}
-            <div class="col-sm-4">
-                <div class="activity-list-item">
-                    <a href="/index/activity/view?id={$activity.id}"><img src="/{$activity.cover}"/></a>
-                    <a href="/index/activity/view?id={$activity.id}"><span>[{$activity.start|date="n月j号",###}] </span>{$activity.caption}</a>
-                    <span></span>
-                </div>
-            </div>
-            {if condition="$key%3 eq '2'"}
-        </div>
-        {/if}
-        {/foreach}
-    </div>
-    <a href="/index/activity/" class="pull-right a-see-more-activity">更多活动</a>
+<!---->
+<div class="welcome">
+     <div class="container">
+         <div class="welcome-grids">
+              <div class="col-md-6 welcm-pic">
+                 <img src="/static/images/wel.jpg" class="img-responsive" alt=""/>
+              </div>
+              <div class="col-md-6 wel-info">
+                 <h2>嗨！很高兴遇见你</h2>
+                 <h4>想必正是因为有你们,才会觉得生活如此不枯燥,甚至有点小乐趣.很高兴能够遇到你们</h4>
+                 <p>Masagni dolores eoquie voluptaquisquam estqui dolorem ipsumquia dolor sitamnetase adipiscquam eiuse. Basmodi temporant, voluptaquisquam estqui dolorem ut laboreas dolore magnam aliquam kuytase uaeraquis autem vel eum iure reprehend.Unicmquam eius, Basmodi temurer sehsMunim</p>
+              </div>
+              <div class="clearfix"></div>
+         </div>
+     </div>
 </div>
-
-<div class="container">
-    <h1 class="index-blog-title center ">精彩游记</h1>
-    <div class="row">
-        {foreach name="featuredBlog" item="blog"}
-        <div class="blog-entry ">
-            {if condition="$key%2 eq 0"}
-            <div class="col-md-6 col-sm-6 blog-entry-img-column">
-                <a href="/index/blog/view?id={$blog.id}"> <img class="img-rounded blog-entry-img center-block" src="/{$blog.cover}"/></a>
-            </div>
-            <div class="col-md-6 col-sm-6">
-                <div>
-                    <h2 class="blog-entry-caption"><a href="/index/blog/view?id={$blog.id}">{$blog.caption}</a></h2>
-                    <h3 class="hidden-xs blog-entry-author">BY {$blog.author}</h3>
-                    <h3 class="hidden-sm hidden-xs blog-entry-date"><span style="color:red;"> @</span> {$blog.createtime|date="n月j号",###}</h3>
-                </div>
-            </div>
-            {else /}
-            <div class="col-md-6 col-sm-6 blog-entry-desc-column-right">
-                <div>
-                    <h2 class="blog-entry-caption"><a href="/index/blog/view?id={$blog.id}">{$blog.caption}</a></h2>
-                    <h3 class="hidden-xs blog-entry-author">BY {$blog.author}</h3>
-                    <h3 class="hidden-sm hidden-xs blog-entry-date"><span style="color:red;">@</span> {$blog.createtime|date="n月j号",###}</h3>
-                </div>
-            </div>
-            <div class="col-md-6 col-sm-6 blog-entry-img-column-right">
-                <a href="/index/blog/view?id={$blog.id}"> <img class="img-rounded blog-entry-img center-block" src="/{$blog.cover}"/></a>
-            </div>
-            {/if}
-            <div class="clearfix"></div>
-        </div>
-
-        {/foreach}
-    </div>
-    <a href="/index/blog/" class="pull-right a-see-more-blog">更多游记</a>
+<div class="choose">
+     <h3>选择我们</h3>
+     <div class="container">         
+         <div class="choos-girds">
+             <div class="col-md-4 choos-grid">
+                 <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                 <h4>愉快</h4>
+                 <p>Aliquam erat volutpat. Sed laoreet mattis justo ut imperdiet. Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa.</p>
+             </div>
+             <div class="col-md-4 choos-grid">
+                 <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
+                 <h4>放心</h4>
+                 <p>Aliquam erat volutpat. Sed laoreet mattis justo ut imperdiet. Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa.</p>
+             </div>
+             <div class="col-md-4 choos-grid">
+                 <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
+                 <h4>可靠</h4>
+                 <p>Aliquam erat volutpat. Sed laoreet mattis justo ut imperdiet. Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa.</p>
+             </div>
+             <div class="clearfix"></div>
+         </div>
+     </div>
+</div>
+<!---->
+<div class="testimonal">
+     <div class="container">
+         <div class="testi-top">
+             <h3>我们的愿景</h3>
+             <p>从五湖四海，我们相聚到了这里。</p>
+         </div>
+         <div class="testi-slider">
+         
+         <script>
+                        // You can also use "$(window).load(function() {"
+                        $(function () {
+                          // Slideshow 4
+                          $("#slider2").responsiveSlides({
+                            auto: true,
+                            pager: true,
+                            nav: false,
+                            speed: 500,
+                            namespace: "callbacks",
+                            before: function () {
+                              $('.events').append("<li>before event fired.</li>");
+                            },
+                            after: function () {
+                              $('.events').append("<li>after event fired.</li>");
+                            }
+                          });
+                    
+                        });
+         </script>
+         <div  id="top" class="callbacks_container">
+             <ul class="rslides" id="slider2">
+                  <li>
+                     <div class="testimonial-grids">
+                         <div class="testimonial-left">
+                             <img src="/static/images/t1.jpg" alt="" />
+                         </div>
+                         <div class="testimonial-right">                                
+                                <p><span>"</span> Lorem ipsum dolor sit amet consec tetuer adi piscing elit Praesent vestibulum 
+                                    piscing voluptatem accusantium doloremque laudantium elerisque ipsum Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa. In vulputate justo in vitae lacus vehicula pharetra elit Praesent vestibulum lacus<span>"</span>
+                                </p>
+                                <h5>遗忘</h5>
+                                <h6>创始人</h6>
+                         </div>
+                         <div class="clearfix"> </div>
+                     </div>
+                  </li>
+                  <li>
+                     <div class="testimonial-grids">
+                         <div class="testimonial-left">
+                             <img src="/static/images/t3.jpg" alt="" />
+                         </div>
+                         <div class="testimonial-right">
+                                <p><span>"</span> Lorem ipsum dolor sit amet consec tetuer adi piscing elit Praesent vestibulum 
+                                    piscing voluptatem Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa. In vulputate justo in vitae lacus accusantium doloremque laudantium elerisque ipsum vehicula pharetra elit Praesent vestibulum lacus<span>"</span>
+                                </p>
+                                <h5>寒冰</h5>
+                                <h6>领队</h6>
+                         </div>
+                         <div class="clearfix"> </div>
+                     </div>
+                  </li>
+                  <li>
+                     <div class="testimonial-grids">
+                         <div class="testimonial-left">
+                             <img src="/static/images/t2.jpg" alt="" />
+                         </div>
+                         <div class="testimonial-right">                                
+                                <p><span>"</span> Lorem ipsum dolor sit amet consec tetuer adi piscing elit Praesent vestibulum 
+                                    piscing voluptatem accusantium doloremque laudantium elerisque ipsum Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa. In vulputate justo in vitae lacus vehicula pharetra elit Praesent vestibulum lacus<span>"</span>
+                                </p>
+                                <h5>过客</h5>
+                                <h6>领队</h6>
+                         </div>
+                         <div class="clearfix"> </div>
+                     </div>
+                  </li>
+             </ul>
+          </div>
+          </div>
+     </div>
+</div>
+<!---->
+<div id="destination" class="destination">
+     <div class="container">
+         <div class="destination-top">
+             <h3>近期活动</h3>
+             <p>可有可无的前边的一段留白，希望尽量的能够撰写一些有意义的东西放到这里。这里的下面将会放置近期的活动。</p>
+         </div>
+         <div class="destintn-grids">
+             <div class="col-md-4 desti-grid">
+                 <a class="example-image-link" href="/static/images/d1.jpg" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="/static/images/d1.jpg" alt=""/></a>
+                 <div class="desti-info">
+                     <h5><a href="#">第一个活动</a></h5>
+                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
+                 </div>
+             </div>
+             <div class="col-md-4 desti-grid">
+                   <a class="example-image-link" href="/static/images/d2.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d2.jpg" alt=""/></a>
+                 <div class="desti-info">
+                     <h5><a href="#">第二个活动</a></h5>
+                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
+                 </div>
+             </div>
+             <div class="col-md-4 desti-grid">
+                 <a class="example-image-link" href="/static/images/d3.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d3.jpg" alt=""/></a>
+                 <div class="desti-info">
+                     <h5><a href="#">第三个活动</a></h5>
+                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
+                 </div>
+             </div>
+             <div class="clearfix"></div>
+         </div>
+         <div class="destintn-grids">
+             <div class="col-md-4 desti-grid">
+                 <a class="example-image-link" href="/static/images/d4.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d4.jpg" alt=""/></a>
+                 <div class="desti-info">
+                     <h5><a href="#">第四个活动</a></h5>
+                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
+                 </div>
+             </div>
+             <div class="col-md-4 desti-grid">
+                 <a class="example-image-link" href="/static/images/d5.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d5.jpg" alt=""/></a>
+                 <div class="desti-info">
+                     <h5><a href="#">第五个活动</a></h5>
+                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
+                 </div>
+             </div>
+             <div class="col-md-4 desti-grid">
+                 <a class="example-image-link" href="/static/images/d6.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d6.jpg" alt=""/></a>
+                 <div class="desti-info">
+                     <h5><a href="#">第六个活动</a></h5>
+                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
+                 </div>
+             </div>
+             <div class="clearfix"></div>
+         </div>
+     </div>
 </div>
 
 {/block}
