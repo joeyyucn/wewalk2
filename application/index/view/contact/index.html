@@ -1,0 +1,54 @@
+{extend name="public:base" /}
+
+{block name="title"}联系我们{/block}
+
+{block name="tab"}contact{/block}
+
+{block name="header"}
+<style>
+    .activity-content img
+    {
+        max-width: 100%;
+        height: auto;
+        border-radius: 10px;
+    }
+
+</style>
+
+<script type="text/javascript">
+    $(function(){
+    });
+</script>
+{/block}
+{block name="content"}
+<div class="contact">
+    <div class="container">
+        <div class="footer-top heading">
+            <h3>联系我们</h3>
+        </div>
+        <div class="footer-bottom">
+            <div class="col-md-4 footer-left">
+                <div class="f-1">
+                    <span class="glyphicon3 glyphicon-earphone" aria-hidden="true"></span>
+                    <p>+1 234 567 9871</p>
+                </div>
+                <div class="f-1">
+                    <a href="#"><span class="glyphicon3 glyphicon-envelope" aria-hidden="true"></span></a>
+                    <p><a href="mailto:example@email.com">mail@user.com</a></p>
+                </div>
+            </div>
+            <div class="col-md-8 footer-right">
+                <input type="text" placeholder="姓名" name="name"/>
+                <input type="text" placeholder="邮件" name="email"/>
+                <textarea placeholder="" name="message"></textarea>
+                <div class="contact-but">
+                    <form>
+                        <input type="submit" value="提交" />
+                    </form>
+                </div>
+            </div>
+            <div class="clearfix"></div>
+        </div>
+    </div>
+</div>
+{/block}
