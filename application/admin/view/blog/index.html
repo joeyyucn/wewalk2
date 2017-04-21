@@ -4,7 +4,33 @@
 
 {block name="tab"}manage_blog{/block}
 {block name="header"}
-
+<script type="text/javascript">
+    $(function(){
+        $(".delete-blog-link").click(function () {
+            var id = $(this).parents('tr:first').find('td:first').text();
+            row = $(this).parents('tr:first');
+            $.ajax({
+                url:'/admin/blog/deleteblog',
+                method:'POST',
+                data:{id:id},
+                dataType:'json',
+                success: function(data){
+                    if(data.result == 0)
+                    {
+                        row.remove();
+                    }
+                    else
+                    {
+                        alert(data.message);
+                    }
+                },
+                error:function(data) {
+                    alert("厉害了，发生了一个一个内部错误");
+                }
+            })
+        });
+    })
+</script>
 {/block}
 {block name="content"}
 <div class="content">

@@ -14,9 +14,102 @@
     }
 
 </style>
-
+<script src="/static/js/wewalk.js"></script>
 <script type="text/javascript">
+
+    function showError(error) {
+        $("#form_error").removeClass("text-success");
+        $("#form_error").text(error);
+        $("#form_error").addClass("text-danger");
+    }
+
+
+    function showMessage(message)
+    {
+        $("#form_error").removeClass("text-danger");
+        $("#form_error").text(message);
+        $("#form_error").addClass("text-success");
+    }
+
     $(function(){
+
+        $("#btn_submit").click(function(e){
+            e.preventDefault();
+
+            $("#btn_submit").attr("disabled", "disabled");
+
+
+            var name = $("#contact_name").val();
+            var email=$("#contact_email").val();
+            var message = $("#contact_message").val();
+            var captcha = $("#contact_captcha").val();
+            if(name.trim().length == 0)
+            {
+                showError("怎么称呼？");
+                $("#btn_submit").removeAttr("disabled");
+                return;
+            }
+
+            if(!isEmail(email))
+            {
+                showError("邮箱几多？");
+                $("#btn_submit").removeAttr("disabled");
+                return;
+            }
+
+            if(message.trim().length <= 5)
+            {
+                showError("什么指示？");
+                $("#btn_submit").removeAttr("disabled");
+                return;
+            }
+
+            if(captcha.trim().length != 5 )
+            {
+                showError("验证码不对");
+                $("#btn_submit").removeAttr("disabled");
+                return;
+            }
+
+            $.ajax({
+                method: "POST",
+                url: "/index/contact/message",
+                data:{
+                    name:name,
+                    email:email,
+                    message:message,
+                    captcha:captcha
+                },
+                dataType:"json",
+                success: function(data)
+                {
+                     if(data.result == 0)
+                     {
+                         showMessage("已发送");
+                         $("#contact_name").val("");
+                         $("#contact_email").val("");
+                         $("#contact_message").val("");
+                         $("#contact_captcha").val("");
+                     }
+                     else
+                     {
+                         showError(data.message);
+                     }
+                },
+                error: function(data)
+                {
+                    showError("厉害了， 内部错误，请稍后重试。");
+                }
+            }).always(function(){
+                $("#btn_submit").removeAttr("disabled");
+                $(".footer-right div img").attr("src", "/captcha?id=" + Math.random());
+            });
+        });
+
+        $(".footer-right div img").attr("src", "/captcha?id=" + Math.random());
+        $(".footer-right div img").click(function(){
+            $(this).attr("src", "/captcha?id=" + Math.random());
+        });
     });
 </script>
 {/block}
@@ -38,12 +131,15 @@
                 </div>
             </div>
             <div class="col-md-8 footer-right">
-                <input type="text" placeholder="姓名" name="name"/>
-                <input type="text" placeholder="邮件" name="email"/>
-                <textarea placeholder="" name="message"></textarea>
+                <input type="text" placeholder="姓名" name="name" id="contact_name"/>
+                <input type="text" placeholder="邮箱地址" name="email" id="contact_email"/>
+                <textarea placeholder="" name="message" id="contact_message"></textarea>
+                <input type="text" name="captcha" placeholder="验证码" id="contact_captcha"/>
+                <div><img/></div>
                 <div class="contact-but">
                     <form>
-                        <input type="submit" value="提交" />
+                        <input type="submit" id="btn_submit" value="提交" />
+                        <span id="form_error"></span>
                     </form>
                 </div>
             </div>

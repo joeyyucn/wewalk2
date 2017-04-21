@@ -1,0 +1,133 @@
+{extend name="public:base"/}
+
+{block name="title"}消息{/block}
+
+{block name="tab"}manage_message{/block}
+{block name="header"}
+<style type="text/css">
+    #myModelMessage
+    {
+        word-wrap:break-word;
+    }
+</style>
+<script type="text/javascript">
+    $(function(){
+        $("#myModal").hide();
+        $(".btn_view_message").click(function () {
+            var id = $(this).parents('tr:first').find('td:first').text();
+            row = $(this).parents('tr:first');
+            $.ajax({
+                url:'/admin/message/getmessage',
+                method:'GET',
+                data:{id:id},
+                dataType:'json',
+                success: function(data){
+                    if(data.result == 0)
+                    {
+                        $("#myModelSender").text(data.sender);
+                        $("#myModelEmail").text(data.email);
+                        $("#myModelMessage").text(data.message);
+                        $("#myModal").modal();
+                        row.addClass("success");
+                        row.find('td:nth-child(4)').text("已读");
+                    }
+                    else
+                    {
+                        alert(data.message);
+                    }
+                },
+                error:function(data) {
+                    alert("厉害了，发生了一个一个内部错误");
+                }
+            })
+        });
+
+        $(".delete-blog-link").click(function () {
+            var id = $(this).parents('tr:first').find('td:first').text();
+            row = $(this).parents('tr:first');
+            $.ajax({
+                url:'/admin/message/deletemessage',
+                method:'POST',
+                data:{id:id},
+                dataType:'json',
+                success: function(data){
+                    if(data.result == 0)
+                    {
+                        row.remove();
+                    }
+                    else
+                    {
+                        alert(data.message);
+                    }
+                },
+                error:function(data) {
+                    alert("厉害了，发生了一个一个内部错误");
+                }
+            })
+        });
+
+
+    })
+</script>
+{/block}
+{block name="content"}
+<div class="content">
+    <ol class="breadcrumb"><li>查看消息</li></ol>
+    <label class="text-info">当前一共有<strong>{$messages|count}</strong>条游记 </label>
+    <table class="table table-hover">
+        <thead>
+        <tr>
+            <td>ID</td>
+            <td>发送者</td>
+            <td>标题</td>
+            <td>状态</td>
+            <td>删除</td>
+        </tr>
+        </thead>
+        <tbody>
+        {volist name="messages" id="message"}
+        {if condition="$message.flag eq 0"}
+        <tr class="">
+            {else/}
+        <tr class="success">
+            {/if}
+
+            <td>{$message.id}</td>
+            <td>{$message.sender}</td>
+            <td><a href="#" class="btn_view_message">{$message.message|substr=0,10}...</a></td>
+            <td>
+                {switch name="$message.flag"}
+                {case value='0'}未读{/case}
+                {case value='1'}已读{/case}
+                {case value='2’}已标记{/case}
+                {/switch}
+            </td>
+            <td><a class="delete-blog-link" href="#"><span class="glyphicon glyphicon-trash"></span></a></td>
+        </tr>
+        {/volist}
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">查看消息</h4>
+                </div>
+                <div class="modal-body">
+                    <label>发送者：</label><span id="myModelSender"></span><br/>
+                    <label>邮箱：</label><span id="myModelEmail"></span><br/>
+                    <label>消息：</label><br/>
+                    <p id="myModelMessage">
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{/block}

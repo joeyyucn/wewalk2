@@ -1,0 +1,16 @@
+{extend name="public:base"/}
+
+{block name="title"}消息{/block}
+
+{block name="tab"}manage_message{/block}
+{block name="header"}
+
+{/block}
+{block name="content"}
+<div class="content">
+    <ol class="breadcrumb"><li><a href="/admin/messages/index">查看消息</a></li><li>{$message.message|substr=0,10}</li></ol>
+    <span>发件人</span><span>{$message.sender}</span>
+    <span>邮箱地址</span><span>{$message.email}</span>
+    <span>n</span>
+</div>
+{/block}

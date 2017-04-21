@@ -43,9 +43,15 @@ class Blog extends Controller
                 if($publish == "on")
                     $blog->status = 1;
 
-                if(!empty($_FILES['cover']['name']))
+                $file = $request->file('cover');
+                if($file)
                 {
-                    $blog->cover = upload_image("images/blog/", (string)time());
+                    $info = $file->validate(['ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'images'.DS.'uploads');
+                    if($info){
+                        $blog->cover = "/images/uploads/".$info->getSaveName();
+                    }else{
+                        throw new HttpException(500, $file->getError());
+                    }
                 }
 
                 $blog->isUpdate($beUpdate)->save();
@@ -86,9 +92,22 @@ class Blog extends Controller
         }
     }
 
-    public function uploadImage(Request $request)
+    public function deleteBlog(Request $request)
     {
-        $path = upload_image("images/blog/", (string)time());
-        echo json_encode(["location" => "/$path"]);
+        if($request->isAjax() && $request->isPost())
+        {
+            $id = $request->param("id");
+            if(!empty($id))
+            {
+                $blog = BlogModel::get($id);
+                if($blog)
+                {
+                   $blog->delete();
+                }
+                return ['result'=>0, 'message'=>'删除成功'];
+            }
+        }
+        return ["result"=>-1, "message"=>"无效的请求"];
     }
+
 }

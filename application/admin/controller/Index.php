@@ -9,6 +9,7 @@
 namespace app\admin\controller;
 
 use think\Controller;
+use think\exception\HttpException;
 use think\Request;
 use app\admin\model\SiteConfig;
 class Index extends Controller
@@ -63,6 +64,27 @@ class Index extends Controller
             $config->save();
             return ["result"=>0, "value"=>$config->toArray()];
         }
+
+    }
+
+
+    public function uploadImage(Request $request)
+    {
+        $file = $request->file('file');
+        if($file)
+        {
+            $info = $file->validate(['ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'images'.DS.'uploads');
+            if($info){
+                echo json_encode(["location" => "/images/uploads/".$info->getSaveName()]);
+            }else{
+                throw new HttpException(500, $file->getError());
+            }
+        }
+        else
+        {
+            throw new \think\Exception("文件不能为空");
+        }
+
 
     }
 }

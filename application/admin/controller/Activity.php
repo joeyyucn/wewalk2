@@ -21,7 +21,9 @@ class Activity extends  Controller
 
     public function index()
     {
-        $activities = ActivityModel::all();
+        $activities = ActivityModel::all(function($query){
+            $query->where("status", "<>", 3)->order("id", "DESC");
+        });
         $this->assign("activities", $activities);
         return $this->fetch();
     }
@@ -69,9 +71,15 @@ class Activity extends  Controller
                     $activity->status = 1;
                 }
 
-                if(!empty($_FILES['cover']['name']))
+                $file = $request->file('cover');
+                if($file)
                 {
-                    $activity->cover = upload_image("images/activity/", (string)time());
+                    $info = $file->validate(['ext'=>'jpg,png,gif'])->move(ROOT_PATH . 'public' . DS . 'images'.DS.'uploads');
+                    if($info){
+                        $activity->cover = "/images/uploads/".$info->getSaveName();
+                    }else{
+                        throw new HttpException(500, $file->getError());
+                    }
                 }
 
                 $activity->isUpdate($is_update)->save();
@@ -121,4 +129,24 @@ class Activity extends  Controller
             }
         }
     }
+
+    public function deleteActivity(Request $request)
+    {
+        if($request->isAjax() && $request->isPost())
+        {
+            $id = $request->param("id");
+            if(!empty($id))
+            {
+                $activity = ActivityModel::get($id);
+                if($activity)
+                {
+                    $activity->status = 3;
+                    $activity->isUpdate(true)->save();
+                    return ['result'=>0, 'message'=>'删除成功'];
+                }
+            }
+        }
+        return ["result"=>-1, "message"=>"无效的请求"];
+    }
+
 }

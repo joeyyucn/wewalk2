@@ -29,6 +29,15 @@ name CHAR(30) NOT NULL PRIMARY KEY,
 value CHAR(60) NOT NULL DEFAULT ''
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
+CREATE TABLE IF NOT EXISTS message(
+id INT UNSIGNED AUTO_INCREMENT NOT NULL PRIMARY KEY,
+sender CHAR(30) NOT NULL,
+email CHAR(60) NOT NULL,
+message TEXT NOT NULL,
+createtime DATETIME DEFAULT CURRENT_TIMESTAMP,
+flag TINYINT DEFAULT 0
+) ENGINE = InnoDB DEFAULT CHARSET=utf8;
+
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img1", "images/config/home_carousel_img1.jpg");
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img2", "images/config/home_carousel_img2.jpg");
 INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img3", "images/config/home_carousel_img3.jpg");

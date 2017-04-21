@@ -939,6 +939,9 @@ h2.typoh2{
 	-o-border-radius: 0.3em;
 	-ms-border-radius: 0.3em;
 }
+.footer-right div img {
+	height: 40px;
+}
 .contact-but form input[type="submit"] {
 	border: solid 1px #fd7364;
 	outline: none;
@@ -961,6 +964,24 @@ h2.typoh2{
 	-o-transition: 0.5s all;
 	-ms-transition: 0.5s all;
 }
+
+.contact-but form input[type="submit"][disabled="disabled"] {
+	border: solid 1px gray;
+	outline: none;
+	color: gray;
+	padding: 10px 36px;
+	font-size: 1em;
+	font-weight: 600;
+	margin-top: 1.5em;
+	letter-spacing: 1px;
+	-webkit-appearance: none;
+	background:transparent;
+}
+
+.contact-but form span{
+	margin-left: 20px;
+}
+
 .f-1 span{
 	display:inline-block;
 	vertical-align:middle;
