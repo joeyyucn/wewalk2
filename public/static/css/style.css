@@ -53,6 +53,10 @@ a#toTop{
 	z-index:999;
 	
 }
+
+.logo a img{
+	max-width: 150px;
+}
 .glyphicon-road:before{
 	color:#fff;
 	font-size:0.7em;
