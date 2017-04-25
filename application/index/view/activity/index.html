@@ -19,10 +19,9 @@
     <div class="destintn-grids">
         {/if}
         <div class="col-md-4 desti-grid">
-            <a class="example-image-link" href="/{$activity.cover}" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="/{$activity.cover}" alt=""/></a>
+            <a href="/index/activity/view?id={$activity.id}" ><img class="example-image" src="/{$activity.cover}" alt=""/></a>
             <div class="desti-info">
-                <h5><a href="/index/activity/view?id={$activity.id}">{$activity.caption}</a></h5>
-                <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
+                <h5><a href="/index/activity/view?id={$activity.id}"><span>#{$activity.start|date="n月j号",###}#</span>{$activity.caption}</a></h5>
             </div>
         </div>
         {if condition="$key%3 eq '2'"}
@@ -32,6 +31,9 @@
     {/foreach}
 
     <?php if(count($activities)%3 != 0) echo "<div class='clearfix'></div></div>"?>
+    <div class="text-center">
+    {$page}
+    </div>
 </div>
 
 {/block}

@@ -1,0 +1,103 @@
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <link rel="icon" href="../../favicon.ico">
+    <title>wewalk</title>
+    <link rel="stylesheet" href="/static/css/bootstrap-3.1.1.min.css"/>
+    <link rel="stylesheet" href="/static/css/wewalk-admin.css"/>
+    <style>
+        .form-signin div img
+        {
+            height: 35px;
+            border-radius: 10px;
+            margin: 5px;
+        }
+        .form-signin div
+        {
+            display: inline;
+            width: 50%;
+        }
+
+        .form-signin input[type='text']:nth-child(4)
+        {
+            width: 45%;
+            display: inline;
+        }
+    </style>
+    <script src="/static/js/jquery.min.js"></script>
+    <script src="/static/js/bootstrap-3.1.1.min.js"></script>
+    <script type="text/javascript">
+        $(function(){
+            $("#btn_login").click(function(e){
+                e.preventDefault();
+                username = $("#username").val();
+                password = $("#password").val();
+                captcha = $("#captcha").val();
+
+                $.ajax({
+                    url:"/admin/auth/login",
+                    type:"post",
+                    data:{
+                        username: username,
+                        password: password,
+                        captcha: captcha
+                    },
+                    dataType:"json",
+                    success:function(data)
+                    {
+                        if(data.result == 0)
+                        {
+                            window.location.replace("/admin/");
+                        }
+                        else
+                        {
+                            $(".text-warning").text(data.message);
+                            $(".form-signin div img").click();
+                        }
+
+                    },
+                    error:function(data)
+                    {
+                        $(".text-warning").text("碰到了一个错误");
+                        $(".form-signin div img").click();
+                    }
+
+                }).always(function(){
+
+                })
+
+            });
+
+            $(".form-signin div img").attr("src", "/captcha?id=" + Math.random());
+            $(".form-signin div img").click(function(){
+                $(this).attr("src", "/captcha?id=" + Math.random());
+            });
+        });
+    </script>
+</head>
+
+<body>
+
+<div class="container">
+    <div class="alert alert-warning alert-dismissible" role="alert" style="display:none;">
+        <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <strong>Warning!</strong> Better check yourself, you're not looking too good.
+    </div>
+    <form class="form-signin">
+        <h2 class="form-signin-heading">请登陆</h2>
+        <input type="text" id="username" name="username" class="form-control" placeholder="用户名" required autofocus>
+        <input type="password" id="password" name="password" class="form-control" placeholder="密码" required>
+        <input type="text" id="captcha" name="captcha" class="form-control" placeholder="验证码" required>
+        <div><img/></div>
+        <br/>
+
+        <button class="btn btn-lg btn-primary btn-block" type="submit" id="btn_login">登陆</button>
+        <h4 class="text-warning text-center"></h4>
+    </form>
+</div> <!-- /container -->
+
+</body>
+</html>

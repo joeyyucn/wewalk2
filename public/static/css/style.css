@@ -450,6 +450,9 @@ ul.callbacks_tabs.callbacks_tabs {
 .desti-info h5 a:hover{
     color: #73eac4;
 }
+.desti-info h5 a span {
+    #color:#73eac4;
+}
 .desti-info p{
 	color:#999;
 	font-size:0.9em;
@@ -985,6 +988,7 @@ h2.typoh2{
 .f-1 span{
 	display:inline-block;
 	vertical-align:middle;
+    font-size: 1.8em;
 }
 .glyphicon3 {
     position: relative;
@@ -1000,6 +1004,11 @@ h2.typoh2{
 .glyphicon3 {
 	color: #fd7364;
 	font-size:1.8em;
+}
+.faicon3
+{
+    color:#fd7364;
+    font-size:1.8em;
 }
 .f-1 p {
 	color: #999;
@@ -1038,6 +1047,25 @@ h2.typoh2{
 .destintn-grids{
 	position:relative;
 }
+.activity-content
+{
+    word-wrap: break-word;
+}
+.activity-content * img
+{
+    max-width:100%;
+    height:auto;
+}
+.activity-caption
+{
+    text-align: center;
+    color: #73eac4;
+}
+.activity-details table tr td:nth-child(2)
+{
+    color:#fd7364;
+}
+
 /*--responsive--*/
 @media (max-width: 1280px){
 .banner {
@@ -1640,4 +1668,5 @@ i.strp {
 .map iframe {
     min-height: 185px;
 }
+
 }

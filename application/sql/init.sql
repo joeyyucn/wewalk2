@@ -38,9 +38,8 @@ createtime DATETIME DEFAULT CURRENT_TIMESTAMP,
 flag TINYINT DEFAULT 0
 ) ENGINE = InnoDB DEFAULT CHARSET=utf8;
 
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img1", "images/config/home_carousel_img1.jpg");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img2", "images/config/home_carousel_img2.jpg");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_img3", "images/config/home_carousel_img3.jpg");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link1", "#");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link2", "#");
-INSERT IGNORE INTO config(name, value) VALUE("home_carousel_link3", "#");
+CREATE TABLE IF NOT EXISTS admin(
+id INT UNSIGNED auto_increment NOT NULL PRIMARY KEY,
+username CHAR(15) NOT NULL UNIQUE,
+password CHAR(64) NOT NULL
+)ENGINE = InnoDB default CHARSET=utf8;

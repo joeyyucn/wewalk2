@@ -15,10 +15,10 @@ class Activity extends Controller
 {
     public function index()
     {
-        $activities = ActivityModel::all( function($query){
-            $query->where("status", 1)->order('start', 'desc');
-        });
+        $activities = ActivityModel::where("status", 1)->order('start', 'desc')->paginate(9);
         $this->assign("activities", $activities);
+        $page = $activities->render();
+        $this->assign("page", $page);
         return $this->fetch();
     }
 

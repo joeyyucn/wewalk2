@@ -11,11 +11,15 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\admin\model\Blog as BlogModel;
-class Blog extends Controller
+use app\admin\common\AuthRequiredController;
+class Blog extends AuthRequiredController
 {
     public function index()
     {
-        $this->assign('blogs', BlogModel::all());
+        $blogs = BlogModel::order("id", "DESC")->paginate(15);
+        $pages = $blogs->render();
+        $this->assign('blogs', $blogs);
+        $this->assign('pages', $pages);
         return $this->fetch();
     }
 
@@ -75,7 +79,7 @@ class Blog extends Controller
                     return $this->fetch();
                 }
             }
-            return "doesn't exist! STUPID";
+            return "文章不存在";
     }
 
     public function view(Request $request)

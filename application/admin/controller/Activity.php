@@ -11,7 +11,8 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\admin\model\Activity as ActivityModel;
-class Activity extends  Controller
+use app\admin\common\AuthRequiredController;
+class Activity extends  AuthRequiredController
 {
     public function  _initialize()
     {
@@ -21,10 +22,10 @@ class Activity extends  Controller
 
     public function index()
     {
-        $activities = ActivityModel::all(function($query){
-            $query->where("status", "<>", 3)->order("id", "DESC");
-        });
+        $activities = ActivityModel::where("status", "<>", 3)->order("id", "DESC")->paginate(15);
+        $page = $activities->render();
         $this->assign("activities", $activities);
+        $this->assign("page", $page);
         return $this->fetch();
     }
 
@@ -50,7 +51,7 @@ class Activity extends  Controller
                 $end_time = date_create_from_format('Y-m-d H:i:s', $end_time);
 
             if(!empty($caption) and !empty($location) and !empty($start_time)
-                and !empty($end_time) and !empty($price) and !empty($content))
+                and !empty($end_time) and isset($price) and !empty($content))
             {
                 $is_update = false;
                 $activity = new ActivityModel();

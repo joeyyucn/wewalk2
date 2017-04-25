@@ -8,11 +8,12 @@
 
 namespace app\admin\controller;
 
-use think\Controller;
 use think\exception\HttpException;
 use think\Request;
 use app\admin\model\SiteConfig;
-class Index extends Controller
+use app\admin\common\AuthRequiredController;
+
+class Index extends AuthRequiredController
 {
     public function index(Request $request)
     {

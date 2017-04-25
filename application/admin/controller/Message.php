@@ -10,14 +10,17 @@ namespace app\admin\controller;
 use think\Controller;
 use think\Request;
 use app\admin\model\Message as MessageModel;
-class Message extends Controller
+use app\admin\common\AuthRequiredController;
+
+class Message extends AuthRequiredController
 {
 
-    public function index(Request $request)
+    public function index()
     {
-        $this->assign("messages", MessageModel::all(function($query){
-            $query->order("id", "DESC");
-        }));
+        $messages = MessageModel::order("id", "DESC")->paginate(20);
+        $pages = $messages->render();
+        $this->assign("messages", $messages);
+        $this->assign("pages", $pages);
         return $this->fetch();
     }
 

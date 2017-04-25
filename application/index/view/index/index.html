@@ -25,31 +25,33 @@
               </div>
               <div class="col-md-6 wel-info">
                  <h2>嗨！很高兴遇见你</h2>
-                 <h4>想必正是因为有你们,才会觉得生活如此不枯燥,甚至有点小乐趣.很高兴能够遇到你们</h4>
-                 <p>Masagni dolores eoquie voluptaquisquam estqui dolorem ipsumquia dolor sitamnetase adipiscquam eiuse. Basmodi temporant, voluptaquisquam estqui dolorem ut laboreas dolore magnam aliquam kuytase uaeraquis autem vel eum iure reprehend.Unicmquam eius, Basmodi temurer sehsMunim</p>
+                 <br/>
+                 <p>“凡是遥远的地方，对我们都有一种诱惑，不是诱惑与美丽，就是诱惑于传说，即使远方的风景并不尽如人意我们也无需在乎，因为这是在是一个迷人的错，仰首是春，俯首是秋，愿所有的幸福都追随者你，月园是画，月缺是诗。”</p>
+                  <br/>
+                  <p>旅行， 汪国真</p>
               </div>
               <div class="clearfix"></div>
          </div>
      </div>
 </div>
 <div class="choose">
-     <h3>选择我们</h3>
+     <h3>加入我们</h3>
      <div class="container">         
          <div class="choos-girds">
              <div class="col-md-4 choos-grid">
                  <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
                  <h4>愉快</h4>
-                 <p>Aliquam erat volutpat. Sed laoreet mattis justo ut imperdiet. Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa.</p>
+                 <p>说出来你可能不信，我们真的是一群“无可救药”的逗比，如果你善于给别人带来快乐，那么你会发现这里有你的很多知己。</p>
              </div>
              <div class="col-md-4 choos-grid">
                  <span class="glyphicon glyphicon-heart" aria-hidden="true"></span>
-                 <h4>放心</h4>
-                 <p>Aliquam erat volutpat. Sed laoreet mattis justo ut imperdiet. Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa.</p>
+                 <h4>可靠</h4>
+                 <p>这里有身经百战的领队，这里有乐于助人的老驴，是的，我们不去维护完善的景区，但是每一次出行我们确认100%的安全。</p>
              </div>
              <div class="col-md-4 choos-grid">
                  <span class="glyphicon glyphicon-bullhorn" aria-hidden="true"></span>
-                 <h4>可靠</h4>
-                 <p>Aliquam erat volutpat. Sed laoreet mattis justo ut imperdiet. Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa.</p>
+                 <h4>还有嘛，来一个</h4>
+                 <p>特码的老子不是做文字编辑的，谁能再编一个出来。</p>
              </div>
              <div class="clearfix"></div>
          </div>
@@ -59,8 +61,8 @@
 <div class="testimonal">
      <div class="container">
          <div class="testi-top">
-             <h3>我们的愿景</h3>
-             <p>从五湖四海，我们相聚到了这里。</p>
+             <h3>领队寄语</h3>
+             <p>在路上，我们在乎的不仅仅是沿途的风景，还有跟你一起的人，或许你想知道他们是怎样的一群人（逗比）。</p>
          </div>
          <div class="testi-slider">
          
@@ -96,7 +98,7 @@
                                     piscing voluptatem accusantium doloremque laudantium elerisque ipsum Nunc a suscipit mauris. Praesent suscipit, metus sit amet feugiat hendrerit, enim lacinia velit eros sed massa. In vulputate justo in vitae lacus vehicula pharetra elit Praesent vestibulum lacus<span>"</span>
                                 </p>
                                 <h5>遗忘</h5>
-                                <h6>创始人</h6>
+                                <h6>山大王</h6>
                          </div>
                          <div class="clearfix"> </div>
                      </div>
@@ -141,56 +143,25 @@
      <div class="container">
          <div class="destination-top">
              <h3>近期活动</h3>
-             <p>可有可无的前边的一段留白，希望尽量的能够撰写一些有意义的东西放到这里。这里的下面将会放置近期的活动。</p>
+             <p>下面是我们近期的活动，如果有时间，我们很高兴你能加入我们。</p>
          </div>
+         {foreach name="featuredactivity" item="activity"}
+         {if condition="$key%3 eq '0'"}
          <div class="destintn-grids">
+             {/if}
              <div class="col-md-4 desti-grid">
-                 <a class="example-image-link" href="/static/images/d1.jpg" data-lightbox="example-set" data-title="Click the right half of the image to move forward."><img class="example-image" src="/static/images/d1.jpg" alt=""/></a>
+                 <a href="/index/activity/view?id={$activity.id}"><img class="example-image" src="/{$activity.cover}" alt=""/></a>
                  <div class="desti-info">
-                     <h5><a href="#">第一个活动</a></h5>
-                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
+                     <h5><a href="/index/activity/view?id={$activity.id}"><span>#{$activity.start|date="n月j号",###}#</span>{$activity.caption}</a></h5>
                  </div>
              </div>
-             <div class="col-md-4 desti-grid">
-                   <a class="example-image-link" href="/static/images/d2.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d2.jpg" alt=""/></a>
-                 <div class="desti-info">
-                     <h5><a href="#">第二个活动</a></h5>
-                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
-                 </div>
-             </div>
-             <div class="col-md-4 desti-grid">
-                 <a class="example-image-link" href="/static/images/d3.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d3.jpg" alt=""/></a>
-                 <div class="desti-info">
-                     <h5><a href="#">第三个活动</a></h5>
-                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
-                 </div>
-             </div>
+             {if condition="$key%3 eq '2'"}
              <div class="clearfix"></div>
          </div>
-         <div class="destintn-grids">
-             <div class="col-md-4 desti-grid">
-                 <a class="example-image-link" href="/static/images/d4.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d4.jpg" alt=""/></a>
-                 <div class="desti-info">
-                     <h5><a href="#">第四个活动</a></h5>
-                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
-                 </div>
-             </div>
-             <div class="col-md-4 desti-grid">
-                 <a class="example-image-link" href="/static/images/d5.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d5.jpg" alt=""/></a>
-                 <div class="desti-info">
-                     <h5><a href="#">第五个活动</a></h5>
-                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
-                 </div>
-             </div>
-             <div class="col-md-4 desti-grid">
-                 <a class="example-image-link" href="/static/images/d6.jpg" data-lightbox="example-set"><img class="example-image" src="/static/images/d6.jpg" alt=""/></a>
-                 <div class="desti-info">
-                     <h5><a href="#">第六个活动</a></h5>
-                     <p>Aliquam sagittis nunc eu nibh feugiat, ac bibendum massa feugiat. Class aptent taciti sociosqu ad litora torquent nostra.</p>
-                 </div>
-             </div>
-             <div class="clearfix"></div>
-         </div>
+         {/if}
+         {/foreach}
+
+         <?php if(count($featuredactivity)%3 != 0) echo "<div class='clearfix'></div></div>"?>
      </div>
 </div>
 

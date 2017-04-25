@@ -27,14 +27,31 @@
         <li class="active">{$activity.caption}</li>
     </ol>
     <h1 class="activity-caption">{$activity.caption}</h1>
-    <div class="activity-content">
-        <p class="text-label">地点: <span class="text-activity-value">{$activity.location}</span></p>
-        <p class="text-label">开始时间: <span class="text-activity-value">{$activity.start|date="Y年n月j号",###} </span></p>
-        <p class="text-label">结束时间: <span class="text-activity-value">{$activity.start|date="Y年n月j号",###} </span></p>
-        <p class="text-label">价格: <span class="text-activity-value">￥{$activity.price}</span></p>
+    <br/>
+    <div class="activity-details">
+        <table>
+            <tr>
+                <td><label>目的地：</label></td>
+                <td>{$activity.location}</td>
+            </tr>
+            <tr>
+                <td><label>开始时间：</label></td>
+                <td>{$activity.start|date="n月j号",###}</td>
+            </tr>
+            <tr>
+                <td><label>结束时间：</label></td>
+                <td>{$activity.end|date="n月j号",###}</td>
+            </tr>
+            <tr>
+                <td><label>价格：</label></td>
+                <td>￥{$activity.price}</td>
+            </tr>
+        </table>
+        <br/>
         <button class="btn btn-primary" id="order-now" data-toggle="modal" data-target="#order-now-dialog">现在报名</button>
-
     </div>
+    <br/>
+    <hr/>
     <div class="activity-content">
         {$activity.content}
     </div>
@@ -47,10 +64,8 @@
         <div class="modal-content">
             <div style="margin: 20px">
                 <h3>在线预约系统开发中...</h3>
-                <p class="text-info">在线预约系统正在开发中，在此期间请通过QQ群的方式报名。</p>
-                <p class="text-info">我们会尽快完善站点的功能 :)。</p>
+                <p class="text-info">在线预约系统正在开发中，在此期间请通过QQ群53446033报名。</p>
             </div>
-
         </div>
     </div>
 </div>
