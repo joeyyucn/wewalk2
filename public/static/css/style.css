@@ -73,7 +73,7 @@ a#toTop{
 }
 
 .logo a img {
-	max-width: 160px;
+	max-width: 150px;
 }
 ul.nav.navbar-nav li a{
 	padding:2.3em 1.7em;
@@ -1121,7 +1121,7 @@ ul.nav.navbar-nav li a {
 
 .logo a img
 {
-	max-width: 150px;
+	max-width: 90px;
 }
 .content.white {
     margin-left: 10.8em;
@@ -1286,9 +1286,6 @@ ul.nav.navbar-nav li a {
     width: 50%;
 	padding-right: 0em;
 }
-.about-list li:nth-child(2){
-	display:none;
-}
 .about h2, .footer-top h3, .team-top h3, .gallery h2, h2.top {
     font-size: 2em;
 }
@@ -1376,7 +1373,7 @@ ul.nav.navbar-nav li a {
     font-size: 0.8em;
 }
 .logo a {
-    padding: 1.5em 0.5em;
+    padding: 0.5em 0em;
 }
 .logo a img {
 	max-width: 120px;
@@ -1426,9 +1423,6 @@ ul.nav.navbar-nav li {
 }
 .about-top-sec h4 {
     font-size: 0.8em;
-}
-.about-list li:nth-child(4) {
-    display: none;
 }
 .guide-grid {
     width: 100%;
