@@ -632,6 +632,22 @@ background-position:-167px -36px;
     color: #fd7364;
     padding-left: 1em;
 }
+.mobile-media h4
+{
+    text-align: center;
+}
+
+.mobile-media div
+{
+    text-align: center;
+}
+
+.mobile-media div img
+{
+    width:80%;
+    border: black solid 1px;
+    border-radius: 5px;
+}
 .what-offer{
 	background: url(../images/abt-bg.jpg) no-repeat 0px 0px;
     background-size: cover;
@@ -1491,6 +1507,7 @@ ul.callbacks_tabs.callbacks_tabs {
     width: 100%;
     padding: 0em;
 }
+
 .news-ltr form input[type="text"] {
     padding: 7px 12px;
     font-size: 0.85em;
