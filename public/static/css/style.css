@@ -67,6 +67,10 @@ a#toTop{
 	color:#fff;
 	text-decoration:none;
 }
+
+.logo a img {
+	max-width: 160px;
+}
 ul.nav.navbar-nav li a{
 	padding:2.3em 1.7em;
 	font-size:1.1em;
@@ -1110,6 +1114,11 @@ ul.nav.navbar-nav li a {
 .logo a {
     padding: 1.5em 0.5em;
 }
+
+.logo a img
+{
+	max-width: 150px;
+}
 .content.white {
     margin-left: 10.8em;
 }
@@ -1364,6 +1373,9 @@ ul.nav.navbar-nav li a {
 }
 .logo a {
     padding: 1.5em 0.5em;
+}
+.logo a img {
+	max-width: 120px;
 }
 ul.nav.navbar-nav li {
     border-right:none;
