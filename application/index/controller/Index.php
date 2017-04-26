@@ -15,7 +15,7 @@ class Index extends Controller
         $this->assign("config", $config);
 
         // set featured activity
-        $featuredActivity = ActivityModel::where("status", 1)->order('start', 'desc')->limit(3);
+        $featuredActivity = ActivityModel::where("status", 1)->order('start', 'desc')->limit(3)->select();
         $this->assign("featuredactivity", $featuredActivity);
 
         $featuredBlog = BlogModel::all( function($query){
