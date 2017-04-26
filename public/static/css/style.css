@@ -64,7 +64,7 @@ a#toTop{
 }
 .logo a{
   background: #ffcb05;
-  padding: 1.6em 0.7em;
+  #padding: 1.6em 0.7em;
   display:inline-block;
 }
 .logo h1 a{
@@ -1090,6 +1090,42 @@ h2.typoh2{
     color:#fd7364;
 }
 
+.activity-main
+{
+	border:#e0e0e0 solid 1px;
+	padding: 40px 20px;
+}
+
+.activity-aside
+{
+
+}
+
+.widget
+{
+	padding: 20px;
+	border: #e0e0e0 solid 1px;
+	margin-bottom: 15px;
+	word-wrap: break-word;
+}
+.widget .title {
+	margin-top: 0;
+	padding-bottom: 7px;
+	border-bottom: 1px solid #ebebeb;
+	margin-bottom: 21px;
+	position: relative;
+}
+.widget .title:after {
+	content: "";
+	width: 90px;
+	height: 1px;
+	background: #f4645f;
+	position: absolute;
+	left: 0;
+	bottom: -1px;
+}
+
+
 /*--responsive--*/
 @media (max-width: 1280px){
 .banner {
@@ -1116,7 +1152,7 @@ ul.nav.navbar-nav li a {
     padding: 2em 1.5em;
 }
 .logo a {
-    padding: 1.5em 0.5em;
+    #padding: 1.5em 0.5em;
 }
 
 .logo a img
@@ -1338,6 +1374,11 @@ ul.nav.navbar-nav li a {
 .glyphicon3 {
     font-size: 1.5em;
 }
+
+.activity-aside
+{
+	padding: 20px 0px;
+}
 }
 @media (max-width: 800px){
 .banner-grids {
@@ -1373,7 +1414,7 @@ ul.nav.navbar-nav li a {
     font-size: 0.8em;
 }
 .logo a {
-    padding: 0.5em 0em;
+    #padding: 0.5em 0em;
 }
 .logo a img {
 	max-width: 120px;

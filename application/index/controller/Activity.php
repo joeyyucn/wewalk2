@@ -29,8 +29,16 @@ class Activity extends Controller
         if(!empty($id))
         {
           $activity = ActivityModel::get($id);
-          if(!empty($activity))
+          if(!empty($activity) && $activity->status == 1)
           {
+
+              $featuredActivities = ActivityModel::All(function($query){
+                  $query->where("status", 1)->order('start', 'desc')->limit(3);
+              });
+              $featuredActivities = ActivityModel::where("status", 1)->where('id', '<>', $id)->order('start','desc')->limit(5)->select();
+              $this->assign("featuredActivities", $featuredActivities);
+
+              $activity = ActivityModel::get($id);
               $this->assign("activity", $activity);
               return $this->fetch();
           }
