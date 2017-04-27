@@ -25,16 +25,11 @@ class Activity extends Controller
     public function view(Request $request)
     {
         $id = $request->param("id");
-        $found = false;
         if(!empty($id))
         {
           $activity = ActivityModel::get($id);
           if(!empty($activity) && $activity->status == 1)
           {
-
-              $featuredActivities = ActivityModel::All(function($query){
-                  $query->where("status", 1)->order('start', 'desc')->limit(3);
-              });
               $featuredActivities = ActivityModel::where("status", 1)->where('id', '<>', $id)->order('start','desc')->limit(5)->select();
               $this->assign("featuredActivities", $featuredActivities);
 
