@@ -44,6 +44,19 @@ class Activity extends  AuthRequiredController
             $end_time = $request->param("dateend");
             $price = $request->param("price");
             $content = $request->param("content");
+            $gather = $request->param("gather");
+            $leaders = $request->param("leaders");
+            $sleep_style = $request->param("sleeptype");
+            $strength = $request->param("strength");
+            $difficulty = $request->param("difficulty");
+            $danger = $request->param("danger");
+            $view = $request->param("view");
+
+            $strength = (int)$strength;
+            $difficulty = (int)$difficulty;
+            $danger = (int)$danger;
+            $view = (int)$view;
+
             if(!empty($start_time))
                 $start_time = date_create_from_format('Y-m-d H:i:s', $start_time);
 
@@ -51,7 +64,8 @@ class Activity extends  AuthRequiredController
                 $end_time = date_create_from_format('Y-m-d H:i:s', $end_time);
 
             if(!empty($caption) and !empty($location) and !empty($start_time)
-                and !empty($end_time) and isset($price) and !empty($content))
+                and !empty($end_time) and isset($price) and !empty($content)
+                and !empty($gather) and !empty($leaders) and !empty($sleep_style))
             {
                 $is_update = false;
                 $activity = new ActivityModel();
@@ -67,6 +81,13 @@ class Activity extends  AuthRequiredController
                 $activity->price = $price;
                 $activity->content = $content;
                 $activity->status = 0;
+                $activity->gather_location = $gather;
+                $activity->leaders = $leaders;
+                $activity->sleep_style = $sleep_style;
+                $activity->strength =$strength;
+                $activity->difficulty = $difficulty;
+                $activity->danger = $danger;
+                $activity->view = $view;
                 if($request->param("publish") == 'on')
                 {
                     $activity->status = 1;
@@ -89,7 +110,7 @@ class Activity extends  AuthRequiredController
             }
             else
             {
-                return ['result'=> -1, 'error'=>'invalid request' ];
+                return ['result'=> -1, 'error'=>'信息不完整' ];
             }
         }
 

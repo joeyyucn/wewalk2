@@ -79,36 +79,72 @@
     <form method="post"  action="/admin/activity/create"  id="form_activity">
         <input type="hidden" name="id" id="activity_id" value="-1"/>
         <div class="form-group">
-            <label for="caption">标题</label>
-            <input type="text" class="form-control" id="caption" name="caption" placeholder="标题"/>
-        </div>
-        <div class="form-group">
-            <label for="location">目的地</label>
-            <input type="text" class="form-control" id="location" name="location" placeholder="目的地"/>
-        </div>
-        <div class="form-group">
-            <label for="datestart">开始时间</label>
-            <input type="datetime" class="form-control" id="datestart" name="datestart" placeholder="YYYY-MM-DD HH:MM:SS"/>
-        </div>
-        <div class="form-group">
-            <label for="dateend">结束时间</label>
-            <input type="datetime" class="form-control" id="dateend" name="dateend" placeholder="YYYY-MM-DD HH:MM:SS"/>
-        </div>
-        <div class="form-group">
-            <label for="price">价格</label>
-            <input type="text" class="form-control" id="price" name="price" placeholder="￥"/>
-        </div>
-        <textarea name="content" id="content" class="mce_edit_panel" style="display: none;"></textarea><br/>
-        <div class="form-group">
             <label for="cover">封面图片<mark>比例为650x400</mark></label>
             <input type="file" class="form-control" id="cover" name="cover" />
         </div>
         <div style="text-align: center;">
             <img id="coverpreview" src="" class="cover_preview"/>
         </div>
+        <div class="form-group">
+            <label for="caption">标题</label>
+            <input type="text" class="form-control" id="caption" name="caption" placeholder="标题"/>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="location">活动地点</label>
+                <input type="text" class="form-control" id="location" name="location" placeholder="活动地点"/>
+            </div>
+            <div class="col-sm-6">
+                <label for="gather">集合地点</label>
+                <input type="text" class="form-control" id="gather" name="gather" placeholder="集合地点"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="leaders">活动领队</label>
+                <input type="text" class="form-control" id="leaders" name="leaders" placeholder="领队"/>
+            </div>
+            <div class="col-sm-6">
+                <label for="sleeptype">住宿方式</label>
+                <input type="text" class="form-control" id="sleeptype" name="sleeptype" placeholder="住宿方式"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-5">
+                <label for="datestart">开始时间</label>
+                <input type="datetime" class="form-control" id="datestart" name="datestart" placeholder="YYYY-MM-DD HH:MM:SS"/>
+            </div>
+            <div class="col-sm-5">
+                <label for="dateend">结束时间</label>
+                <input type="datetime" class="form-control" id="dateend" name="dateend" placeholder="YYYY-MM-DD HH:MM:SS"/>
+            </div>
+            <div class="col-sm-2">
+                <label for="price">价格</label>
+                <input type="text" class="form-control" id="price" name="price" placeholder="￥"/>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-3">
+                <label for="difficulty">难度指数</label>
+                <input type="text" class="form-control" id="difficulty" name="difficulty" placeholder="难度指数"/>
+            </div>
+            <div class="col-sm-3">
+                <label for="strength">强度指数</label>
+                <input type="text" class="form-control" id="strength" name="strength" placeholder="强度指数"/>
+            </div>
+            <div class="col-sm-3">
+                <label for="danger">危险指数</label>
+                <input type="text" class="form-control" id="danger" name="danger" placeholder="危险指数"/>
+            </div>
+            <div class="col-sm-3">
+                <label for="view">风景指数</label>
+                <input type="text" class="form-control" id="view" name="view" placeholder="风景指数"/>
+            </div>
+        </div>
+        <textarea name="content" id="content" class="mce_edit_panel" style="display: none;"></textarea><br/>
 
         <label class="checkbox-inline">
-            <input class="pull-right" type="checkbox" id="publish" name="publish"/>发布
+            <input type="checkbox" id="publish" name="publish"/>发布
         </label>
     </form>
 

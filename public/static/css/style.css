@@ -1085,9 +1085,30 @@ h2.typoh2{
     text-align: center;
     color: #73eac4;
 }
+.activity-details table tr td:nth-child(1)
+{
+
+}
 .activity-details table tr td:nth-child(2)
 {
     color:#fd7364;
+	margin-left: 50px;
+}
+.activity-details table tr td:nth-child(3)
+{
+	padding-left: 50px;
+}
+.activity-details table tr td:nth-child(4)
+{
+	color:#fd7364;
+	margin-left: 50px;
+}
+
+.activity-option
+{
+	float: left;
+	display: inline;
+
 }
 
 .activity-main

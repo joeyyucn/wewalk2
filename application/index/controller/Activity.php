@@ -43,7 +43,6 @@ class Activity extends Controller
               return $this->fetch();
           }
         }
-
         $this->redirect("/index/activity/index");
     }
 
