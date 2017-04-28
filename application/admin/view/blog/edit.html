@@ -70,7 +70,7 @@
 {block name="content"}
 <div class="content " style="position: relative;">
     <ol class="breadcrumb">
-        <li><a href="/admin/blog/">管理游记</a></li>
+        <li><a href="/admin/blog/">管理BLOG</a></li>
         <li>编辑</li>
     </ol>
     <form method="post"  action="/admin/blog/create"  id="form_blog">
@@ -79,20 +79,28 @@
             <label for="caption">标题</label>
             <input type="text" class="form-control" id="caption" name="caption" placeholder="标题" value="{$blog.caption}"/>
         </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="author">作者</label>
+                <input type="text" class="form-control" id="author" name="author" placeholder="作者" value="{$blog.author}"/>
+            </div>
+            <div class="col-sm-6">
+                <label for="type">类型</label>
+                <select name="type" id="type" class="form-control">
+                    <option value="1" {if condition="$blog.type eq '1'"}selected{/if}>公告</option>
+                    <option value="0" {if condition="$blog.type eq '0'"}selected{/if}>游记</option>
+                </select>
+            </div>
+        </div>
         <textarea name="content" id="content" class="mce_edit_panel" style="display: none;">{$blog.content}</textarea><br/>
-        <div class="form-group">
-            <label for="cover">封面图片<mark>540x234</mark></label>
-            <input type="file" class="form-control" id="cover" name="cover" />
-        </div>
-        <div style="text-align: center;">
-            <img id="coverpreview" src="/{$blog.cover}" class="cover_preview"/>
-        </div>
-
         <label class="checkbox-inline">
-            <input class="pull-right" type="checkbox" id="publish" name="publish" {if condition="$blog.status eq '1'"}checked{/if}/>发布
+            <input type="checkbox" id="publish" name="publish" {if condition="$blog.status eq '1'"}checked{/if}/>发布
+        </label>
+        <label class="checkbox-inline">
+            <input type="checkbox" id="sticktop" name="sticktop" {if condition="$blog.stick_top eq '1'"}checked{/if}/>置顶
         </label>
     </form>
 
-    <button class="btn btn-info pull-right" id="btn_save">保存游记</button>
+    <button class="btn btn-info pull-right" id="btn_save">保存</button>
 </div>
 {/block}

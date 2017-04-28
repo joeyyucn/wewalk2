@@ -1122,6 +1122,56 @@ h2.typoh2{
 
 }
 
+.blog-main
+{
+	border:#e0e0e0 solid 1px;
+	padding: 40px 20px;
+}
+
+.blog-list-featured
+{
+	margin-bottom: 50px;
+}
+.blog-list-featured .title
+{
+	border-bottom: 1px solid #ebebeb;
+	padding-bottom: 7px;
+	margin-bottom: 10px;
+	color:#fd7364;
+}
+
+.blog-statement
+{
+	margin-bottom: 4px;
+}
+
+.blog-statement a
+{
+	color:#fd7364;
+}
+
+.blog-article
+{
+	margin-bottom: 4px;
+}
+
+.blog-article a
+{
+	color:#23527c ;
+}
+
+.blog-meta-data
+{
+	text-align: center;
+	display: block;
+	color: #AAAAAA;
+}
+
+.blog-meta-data span
+{
+	color:#fd7364;
+}
+
 .widget
 {
 	padding: 20px;
@@ -1178,7 +1228,7 @@ ul.nav.navbar-nav li a {
 
 .logo a img
 {
-	max-width: 90px;
+	max-width: 130px;
 }
 .content.white {
     margin-left: 10.8em;
@@ -1336,11 +1386,9 @@ ul.nav.navbar-nav li a {
 }
 .about-list {
     float: left;
-    width: 50%;
 }
 .about-pic{
 	float: left;
-    width: 50%;
 	padding-right: 0em;
 }
 .about h2, .footer-top h3, .team-top h3, .gallery h2, h2.top {
@@ -1509,6 +1557,24 @@ ul.nav.navbar-nav li {
     padding: 8px 30px;
     font-size: 0.9em;
 	margin-top:1em;
+}
+.activity-details table tr td:nth-child(1)
+{
+
+}
+.activity-details table tr td:nth-child(2)
+{
+	color:#fd7364;
+	margin-left: 50px;
+}
+.activity-details table tr td:nth-child(3)
+{
+	padding-left: 50px;
+}
+.activity-details table tr td:nth-child(4)
+{
+	color:#fd7364;
+	margin-left: 50px;
 }
 }
 @media(max-width:480px){

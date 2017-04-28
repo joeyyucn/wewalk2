@@ -1,6 +1,6 @@
 {extend name="public:base" /}
 
-{block name="title"}活动{/block}
+{block name="title"}BLOG{/block}
 
 {block name="tab"}page_blog{/block}
 
@@ -10,29 +10,46 @@
 {block name="content"}
 <div class="container">
     <ol class="breadcrumb">
-        <li class="active">全部游记</li>
+        <li>BLOG</li>
     </ol>
-    <div>
     <div class="row">
-        {foreach name="blogs" item="blog"}
-        <div class="blog-entry ">
-            <div class="col-md-6 col-sm-6 blog-entry-img-column">
-               <a href="/index/blog/view?id={$blog.id}"> <img class="img-rounded blog-entry-img center-block" src="/{$blog.cover}"/></a>
-            </div>
-            <div class="col-md-6 col-sm-6 ">
-                <div>
-                    <h2 class="blog-entry-caption"><a href="/index/blog/view?id={$blog.id}">{$blog.caption}</a></h2>
-                    <h3 class="hidden-xs blog-entry-author">BY {$blog.author}</h3>
-                    <h3 class="hidden-sm hidden-xs blog-entry-date"><span style="color:red;">@</span> {$blog.createtime|date="n月j号",###}</h3>
+        <main class="col-md-8 blog-main">
+            <section class="blog-list-featured">
+                <h3 class="title">置顶</h3>
+                {foreach name="featuredblogs" item="blog"}
+                    {switch name="blog.type"}
+                        {case value="0"}<h4 class="blog-article"><a href="/index/blog/view?id={$blog.id}">[游记]  {$blog.caption}</a></h4>{/case}
+                        {case value="1"}<h4 class="blog-statement"><a href="/index/blog/view?id={$blog.id}">[公告]  {$blog.caption}</a></h4>{/case}
+                    {/switch}
+                {/foreach}
+            </section>
+
+            <section class="blog-list">
+                <hr/>
+                {foreach name="blogs" item="blog"}
+                {switch name="blog.type"}
+                {case value="0"}<h4 class="blog-article"><a href="/index/blog/view?id={$blog.id}">[游记]  {$blog.caption}</a></h4>{/case}
+                {case value="1"}<h4 class="blog-statement"><a href="/index/blog/view?id={$blog.id}">[公告]  {$blog.caption}</a></h4>{/case}
+                {/switch}
+                {/foreach}
+                <div class="text-center">
+                    {$page}
                 </div>
+            </section>
+        </main>
+        <aside class="col-md-4 activity-aside">
+            <div class="widget">
+                <h4 class="title">社区</h4>
+                <p>QQ群：53446033</p>
             </div>
-            <div class="clearfix"></div>
-        </div>
-        <hr style="border-color:#eee;"/>
 
-        {/foreach}
+            <div class="widget">
+                <h4 class="title">活动推荐</h4>
+                {foreach name="featuredActivities" item="activity"}
+                <p><a href="/index/activity/view?id={$activity.id}">#{$activity.start|date="n月j号",###}# {$activity.caption}</a></p>
+                {/foreach}
+            </div>
+        </aside>
     </div>
-        <hr/>
-
 </div>
 {/block}

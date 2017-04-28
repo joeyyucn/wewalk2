@@ -1,39 +1,41 @@
 {extend name="public:base" /}
 
-{block name="title"}活动{/block}
+{block name="title"}{$blog.caption}{/block}
 
 {block name="tab"}page_blog{/block}
 
 {block name="header"}
-<style>
-
-    .blog-content img
-    {
-        max-width: 100%;
-        height: auto;
-        border-radius: 10px;
-    }
-</style>
-
-<script type="text/javascript">
-    $(function(){
-    });
-</script>
 {/block}
+
 {block name="content"}
 <div class="container">
     <ol class="breadcrumb">
-        <li><a href="/index/blog/">全部游记</a></li>
-        <li class="active">{$blog.caption}</li>
+        <li><a href="/index/blog/">BLOG</a></li>
+        <li>{$blog.caption}</li>
     </ol>
+    <div class="row">
+        <main class="col-md-8 blog-main">
+           <h1 class="activity-caption">{$blog.caption}</h1>
+            <br/>
+            <span class="blog-meta-data">作者：<span class="blog-author">{$blog.author}</span> • {$blog.createtime|date="Y年n月j日", ###}</span>
+            <hr/>
+            <div class="activity-content">
+                {$blog.content}
+            </div>
+        </main>
+        <aside class="col-md-4 activity-aside">
+            <div class="widget">
+                <h4 class="title">社区</h4>
+                <p>QQ群：53446033</p>
+            </div>
 
-    <div class="blog-content">
-        <h1 class="blog-caption">{$blog.caption}</h1>
-        <span class="blog-meta-data">作者：<span class="blog-author">{$blog.author}</span> • {$blog.createtime|date="Y年n月j日", ###}</span>
-        <hr/>
-        <div>
-            {$blog.content}
-        </div>
+            <div class="widget">
+                <h4 class="title">活动推荐</h4>
+                {foreach name="featuredActivities" item="activity"}
+                <p><a href="/index/activity/view?id={$activity.id}">#{$activity.start|date="n月j号",###}# {$activity.caption}</a></p>
+                {/foreach}
+            </div>
+        </aside>
     </div>
 </div>
 {/block}

@@ -35,18 +35,26 @@ class Blog extends AuthRequiredController
             $content = $request->param("content");
             $publish = $request->param("publish");
             $id = $request->param("id");
-            if(!empty($caption) && !empty($content) && !empty($id))
+            $sticktop = $request->param("sticktop");
+            $type = $request->param("type");
+            $author= $request->param("author");
+            if(!empty($caption) && !empty($content) && !empty($id) && isset($type) &&isset($author))
             {
                 $beUpdate = $id != -1;
                 $blog = new BlogModel();
                 $blog->caption = $caption;
                 $blog->content = $content;
+                $blog->author = $author;
                 if($beUpdate)
                     $blog->id = $id;
 
                 if($publish == "on")
                     $blog->status = 1;
+                else
+                    $blog->status = 0;
+                $blog->stick_top = ($sticktop == "on");
 
+                $blog->type = $type;
                 $file = $request->file('cover');
                 if($file)
                 {
@@ -63,7 +71,7 @@ class Blog extends AuthRequiredController
 
                 return ["result"=>0, "id"=>$blog->getData("id")];
             }
-            return ["result"=>-1, "error"=>"invalid request"];
+            return ["result"=>-1, "error"=>"数据不完善"];
         }
     }
 

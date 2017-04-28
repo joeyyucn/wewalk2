@@ -11,6 +11,7 @@ namespace app\index\controller;
 use think\Controller;
 use think\Request;
 use app\admin\model\Activity as ActivityModel;
+
 class Activity extends Controller
 {
     public function index()
