@@ -14,6 +14,7 @@ use think\Cookie;
 class AuthUtil
 {
     private static $auth_session_key = "login_user";
+    private static $auth_last_active_key = "last_active";
     public static function isLogin()
     {
         return !empty(Session::get(AuthUtil::$auth_session_key));
