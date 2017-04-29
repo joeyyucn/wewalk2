@@ -8,6 +8,7 @@
 
 namespace app\admin\controller;
 use app\admin\common\AuthUtil;
+use Phinx\Util;
 use think\Controller;
 use think\Request;
 
@@ -68,5 +69,36 @@ class Auth extends Controller
             AuthUtil::logout();
         }
         return $this->redirect("/admin/auth/login");
+    }
+
+    public function setpassword(Request $request)
+    {
+        if(AuthUtil::isLogin())
+        {
+            $this->assign("loginUser", AuthUtil::username());
+            if($request->isAjax() and $request->isPost())
+            {
+                $oldPassword = $request->param("oldpassword");
+                $newPassword1 = $request->param("newpassword1");
+                $newPassword2 = $request->param("newpassword2");
+                if(!empty($oldPassword) && !empty($newPassword1) && !empty($newPassword2))
+                {
+                    if($newPassword2 != $newPassword1)
+                        return ['result'=>-1, 'message'=>'两次输入不同'];
+                    $name = AuthUtil::username();
+                    if(AuthUtil::verify($name, $oldPassword))
+                        return ['result'=>-2, 'message'=>'旧密码错误'];
+                    AuthUtil::resetPassword($name, $newPassword1);
+                    return ['result'=>0,'message'=>'修改成功'];
+                }
+                return ['result'=>-3, 'message'=>'表单不完整'];
+            }
+            else
+                return $this->fetch();
+        }
+        else
+        {
+            return $this->redirect('/admin/auth/login/');
+        }
     }
 }

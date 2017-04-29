@@ -1121,7 +1121,10 @@ h2.typoh2{
 {
 
 }
-
+.activity-attr span
+{
+	color: #fd7364;
+}
 .blog-main
 {
 	border:#e0e0e0 solid 1px;

@@ -17,11 +17,11 @@ class Blog extends Controller
     public function index()
     {
         $featuredblogs =BlogModel::all( function($query){
-            $query->where("status", 1)->where("stick_top", true)->order("lastupdate", 'desc');
+            $query->where("status", 1)->where("stick_top", true)->order("createtime", 'DESC');
         });
         $this->assign("featuredblogs", $featuredblogs);
 
-        $blogs = BlogModel::where("stick_top", false)->where("status", 1)->order("lastupdate", 'desc')->paginate(20);
+        $blogs = BlogModel::where("stick_top", false)->where("status", 1)->order("createtime", 'desc')->paginate(20);
         $this->assign("blogs", $blogs);
         $this->assign("page", $blogs->render());
 

@@ -50,7 +50,7 @@
                                 $("#activity_id").val(data.id);
                                 break;
                             case -1:
-                                showMessage("保存失败", 1);
+                                showMessage(data.message, 1);
                                 break;
                         }
                     },
