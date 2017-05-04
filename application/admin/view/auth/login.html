@@ -48,7 +48,7 @@
                     dataType:"json",
                     success:function(data)
                     {
-                        if(data.result == 0)
+                        if(data.result == 0 || data.result == -3)
                         {
                             window.location.replace("/admin/");
                         }

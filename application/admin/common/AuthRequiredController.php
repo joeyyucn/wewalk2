@@ -21,7 +21,7 @@ class AuthRequiredController extends Controller
         {
             if($this->request->isAjax())
             {
-                return ["result"=>"-1", "未登录"];
+                return ["result"=>"-1", "未登录或登录过期，请重新登录"];
             }
             else
             {
