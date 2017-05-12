@@ -1,0 +1,5 @@
+1. mysql5.7 install MYSQL https://dev.mysql.com/doc/mysql-yum-repo-quick-guide/en/ QQQaaa000!@#
+2. install php56 and mod_php with remi repo http://rpms.remirepo.net/wizard/
+3. install php-pdo php-gd php-mysqlnd php-xml
+4. modify httpd.conf to serve the new site
+4. install composer and install https://www.epictrim.com/ideas/install-composer-on-centos/
