@@ -14,9 +14,33 @@ use app\admin\model\Activity as ActivityModel;
 
 class Activity extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $activities = ActivityModel::where("status", 1)->order('start', 'desc')->paginate(9);
+        $type = $request->param('type');
+        if(!isset($type))
+        {
+            $type = 4;
+        }
+
+            switch ($type)
+            {
+                case 0:
+                    $activities = ActivityModel::where("status", 1)->where('type', 0)->order('start', 'desc')->paginate(9);
+                    break;
+                case 1:
+                    $activities = ActivityModel::where("status", 1)->where('type', 1)->order('start', 'desc')->paginate(9);
+                    break;
+                case 2:
+                    $activities = ActivityModel::where("status", 1)->where('type', 2)->order('start', 'desc')->paginate(9);
+                    break;
+                case 3:
+                    $activities = ActivityModel::where("status", 1)->where('type','<>', 0)->order('start', 'desc')->paginate(9);
+                    break;
+                default:
+                    $activities = ActivityModel::where("status", 1)->order('start', 'desc')->paginate(9);
+                    break;
+            }
+        $this->assign("type", $type);
         $this->assign("activities", $activities);
         $page = $activities->render();
         $this->assign("page", $page);

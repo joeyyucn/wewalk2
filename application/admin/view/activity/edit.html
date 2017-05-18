@@ -105,13 +105,21 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <label for="leaders">活动领队</label>
                 <input type="text" class="form-control" id="leaders" name="leaders" placeholder="领队" value="{$activity.leaders}"/>
             </div>
-            <div class="col-sm-6">
+            <div class="col-sm-5">
                 <label for="sleeptype">住宿方式</label>
                 <input type="text" class="form-control" id="sleeptype" name="sleeptype" placeholder="住宿方式" value="{$activity.sleep_style}"/>
+            </div>
+            <div class="col-sm-2">
+                <label for="type">活动类型</label>
+                <select name="type" id="type" class="form-control" value="{$activity.type}">
+                    <option value="0">周边</option>
+                    <option value="1">长途</option>
+                    <option value="2">代理</option>
+                </select>
             </div>
         </div>
         <div class="row">

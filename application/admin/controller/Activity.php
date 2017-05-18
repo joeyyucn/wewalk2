@@ -51,11 +51,13 @@ class Activity extends  AuthRequiredController
             $difficulty = $request->param("difficulty");
             $danger = $request->param("danger");
             $view = $request->param("view");
+            $type = $request->param("type");
 
             $strength = (int)$strength;
             $difficulty = (int)$difficulty;
             $danger = (int)$danger;
             $view = (int)$view;
+            $type = (int)$type;
 
             if(!empty($start_time))
                 $start_time = date_create_from_format('Y-m-d H:i:s', $start_time);
@@ -65,7 +67,8 @@ class Activity extends  AuthRequiredController
 
             if(!empty($caption) and !empty($location) and !empty($start_time)
                 and !empty($end_time) and isset($price) and !empty($content)
-                and !empty($gather) and !empty($leaders) and !empty($sleep_style))
+                and !empty($gather) and !empty($leaders) and !empty($sleep_style)
+                and !empty($type))
             {
                 $is_update = false;
                 $activity = new ActivityModel();
@@ -88,6 +91,7 @@ class Activity extends  AuthRequiredController
                 $activity->difficulty = $difficulty;
                 $activity->danger = $danger;
                 $activity->view = $view;
+                $activity->type = $type;
                 if($request->param("publish") == 'on')
                 {
                     $activity->status = 1;

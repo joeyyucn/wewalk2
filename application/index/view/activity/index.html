@@ -10,7 +10,14 @@
 {block name="content"}
 <div class="container">
     <ol class="breadcrumb">
-        <li class="active">全部活动</li>
+        {switch name="type"}
+            {case value="0"}<li><a href="/index/activity">全部活动</a></li><li class="active">周边</li>{/case}
+            {case value="1"}<li><a href="/index/activity">全部活动</a></li><li class="active">长途</li>{/case}
+            {case value="2"}<li><a href="/index/activity">全部活动</a></li><li class="active">代理</li>{/case}
+            {case value="3"}<li><a href="/index/activity">全部活动</a></li><li class="active">长途</li>{/case}
+            {default /}<li class="active">全部活动</li>
+        {/switch}
+
     </ol>
 
 

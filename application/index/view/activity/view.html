@@ -53,6 +53,12 @@
                             <label>活动领队：</label>
                             <span>{$activity.leaders}</span>
                         </div>
+                        {eq name="activity.type" value="2"}
+                            <div class="activity-attr">
+                                <label>开始时间：</label>
+                                <span>见下方介绍</span>
+                            </div>
+                        {else/}
                         <div class="activity-attr">
                             <label>开始时间：</label>
                             <span>{$activity.start|date="n月j号",###}</span>
@@ -61,6 +67,7 @@
                             <label>结束时间：</label>
                             <span>{$activity.end|date="n月j号",###}</span>
                         </div>
+                        {/eq}
                     </div>
                     <div class="col-sm-5">
                         <div class="activity-attr">
@@ -113,7 +120,8 @@
         <div class="modal-content">
             <div style="margin: 20px">
                 <h3>在线预约系统开发中...</h3>
-                <p class="text-info">在线预约系统正在开发中，在此期间请通过QQ群53446033报名。</p>
+                <p class="text-info">在线预约系统正在开发中，在此期间请通过QQ群<a target="_blank" href="//shang.qq.com/wpa/qunwpa?idkey=849ccbb20ebe40eeff22c8590609851670c46f1b7db8648412f0353b1df13aab">53446033</a>报名。
+                </p>
             </div>
         </div>
     </div>
