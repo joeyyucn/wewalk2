@@ -65,10 +65,7 @@ class Activity extends  AuthRequiredController
             if(!empty($end_time))
                 $end_time = date_create_from_format('Y-m-d H:i:s', $end_time);
 
-            if(!empty($caption) and !empty($location) and !empty($start_time)
-                and !empty($end_time) and isset($price) and !empty($content)
-                and !empty($gather) and !empty($leaders) and !empty($sleep_style)
-                and !empty($type))
+            if(!empty($caption))
             {
                 $is_update = false;
                 $activity = new ActivityModel();
